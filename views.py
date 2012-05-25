@@ -1,4 +1,6 @@
-from django.views.generic import TemplateView
+from django.views.generic import DetailView
+from ap_wfm.models import APStory
 
-class IndexView(TemplateView):
-    template_name = 'ap_fm/index.html'
+class APStoryDetailView(DetailView):
+    model = APStory
+    slug_field = 'pk'

@@ -1,6 +1,6 @@
 <h1>Stories</h1>
 <ul>
 	{% for apstory in object_list %}
-		<li><a href="">{{ apstory.headline }}</a><br>Published: {{ apstory.published }}<br>Updated: {{ apstory.updated }}</li>
+		<li><a href="{{ apstory.id }}">{{ apstory.headline }}</a><br>Published: {{ apstory.published }}<br>Updated: {{ apstory.updated }}</li>
 	{% endfor %}
 </ul>
