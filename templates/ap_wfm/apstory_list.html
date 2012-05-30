@@ -1,3 +1,4 @@
+{% load thumbnail_tags %}
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -6,7 +7,17 @@
 <h1>Stories</h1>
 <ul>
 	{% for apstory in object_list %}
-		<li><img src="{{ apstory.image_set.all.0.thumb_url }}"><a href="{{ apstory.id }}">{% firstof apstory.headline apstory.title %}</a><br>Published: {{ apstory.published }}<br>Updated: {{ apstory.updated }}</li>
+		{% if apstory.image_set.all %}
+			<li>
+			{% for ap_image in apstory.image_set.all %}
+				<img src="http://uploads.registerguard.com/{% thumbnail ap_image.image 100 100 %}"> Photo: <a href="{{ apstory.id }}">{% firstof apstory.headline apstory.title %}</a>
+			{% endfor %}
+			<br>Published: {{ apstory.published }}<br>Updated: {{ apstory.updated }}
+			{% if apstory.contributor %}<br><b>{{ apstory.contributor }}</b>{% endif %}
+			</li>
+		{% else %}
+			<li><a href="{{ apstory.id }}">{% firstof apstory.headline apstory.title %}</a><br>Published: {{ apstory.published }}<br>Updated: {{ apstory.updated }}{% if apstory.contributor %}<br><b>{{ apstory.contributor }}</b>{% endif %}</li>
+		{% endif %}
 	{% endfor %}
 </ul>
 </body>
