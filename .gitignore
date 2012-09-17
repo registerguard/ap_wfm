@@ -1,6 +1,10 @@
 *.py[co]
 .DS_Store
 
+.Python
+include/
+lib/
+
 # Packages
 *.egg
 *.egg-info

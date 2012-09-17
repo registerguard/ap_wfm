@@ -7,7 +7,8 @@ class ImageInline(admin.TabularInline):
 
 class APStoryAdmin(admin.ModelAdmin):
     save_on_top = True
-    list_display = ('title', 'headline', 'published', 'updated', 'contributor', 'consumer_ready', 'priority_numeric', 'priority_legacy', 'location',)
+    search_fields = ['title', 'headline', 'slugline',]
+    list_display = ('id', 'title', 'headline', 'slugline', 'image_count', 'media_type', 'published', 'updated', 'contributor', 'consumer_ready', 'priority_numeric', 'priority_legacy', 'location',)
     inlines = [
         ImageInline,
     ]
