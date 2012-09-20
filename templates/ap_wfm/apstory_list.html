@@ -8,15 +8,17 @@
 <ul>
 	{% for apstory in object_list %}
 		{% if apstory.image_set.all %}
-			<li>
+			<li><b><a href="{{ apstory.id }}">{% firstof apstory.headline apstory.title %}</a></b>
+			{# {% comment %} #}
 			{% for ap_image in apstory.image_set.all %}
-				<img src="http://uploads.registerguard.com/{% thumbnail ap_image.image 100 100 %}"> Photo: <a href="{{ apstory.id }}">{% firstof apstory.headline apstory.title %}</a>
+				<br/><img src="{% thumbnail ap_image.image.url 100 100 %}" />
 			{% endfor %}
+			{# {% endcomment %} #}
 			<br>Published: {{ apstory.published }}<br>Updated: {{ apstory.updated }}
 			{% if apstory.contributor %}<br><b>{{ apstory.contributor }}</b>{% endif %}
 			</li>
 		{% else %}
-			<li><a href="{{ apstory.id }}">{% firstof apstory.headline apstory.title %}</a><br>Published: {{ apstory.published }}<br>Updated: {{ apstory.updated }}{% if apstory.contributor %}<br><b>{{ apstory.contributor }}</b>{% endif %}</li>
+			<li><b><a href="{{ apstory.id }}">{% firstof apstory.headline apstory.title %}</a></b><br>Published: {{ apstory.published }}<br>Updated: {{ apstory.updated }}{% if apstory.contributor %}<br><b>{{ apstory.contributor }}</b>{% endif %}</li>
 		{% endif %}
 	{% endfor %}
 </ul>

@@ -4,7 +4,7 @@ from ap_wfm.models import APStory
 
 class APStoryListView(ListView):
     def get_queryset(self):
-        return APStory.objects.filter(published__lte=datetime.datetime.now(), consumer_ready=True)[:50]
+        return APStory.objects.filter(published__lte=datetime.datetime.now(), consumer_ready=True)[:20]
 
 class APStoryDetailView(DetailView):
     model = APStory
