@@ -1,6 +1,7 @@
 from django.db import models
 
 class APStory(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(blank=True)
     published = models.DateTimeField(blank=True)
     consumer_ready = models.BooleanField(default=True)
@@ -12,12 +13,13 @@ class APStory(models.Model):
     contributor_uri = models.CharField(max_length=125, blank=True)
     slugline = models.CharField(max_length=300)
     title = models.CharField(max_length=175)
+    keywords = models.CharField(max_length=180)
     headline = models.CharField(max_length=200, blank=True)
     body = models.TextField(blank=True)
     
     class Meta:
         verbose_name_plural = 'stories'
-        ordering = ['-published']
+        ordering = ['-created']
     
     def __unicode__(self):
         return '%s ID:%s' % (self.headline, self.id)

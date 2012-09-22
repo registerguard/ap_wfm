@@ -1,11 +1,32 @@
+{% extends "base_bulldog.html" %}
+
 {% load thumbnail_tags %}
-<html>
-<head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-</head>
-<body>
-<h1>Stories</h1>
-<ul>
+
+{% load allow_tags %}
+
+{% block head_title %}{{ page.head_title }}{% endblock head_title %}
+
+{% block head_title_extra %}
+	
+	{% if page.head_title_extra %}
+		
+		{{ page.head_title_extra }}
+		
+	{% else %}
+		
+		{{ block.super }}
+		
+	{% endif %}
+	
+{% endblock head_title_extra %}
+
+{% block head_description %}{{ page.head_description }}{% endblock head_description %}
+
+{% block head_keywords %}{{ page.head_keywords }}{% endblock head_keywords %}
+
+{% block head_extra %}{{ page.head_extra|safe }}{% endblock head_extra %}
+
+{% block content %}
 	{% for apstory in object_list %}
 		{% if apstory.image_set.all %}
 			<li><b><a href="{{ apstory.id }}">{% firstof apstory.headline apstory.title %}</a></b>
@@ -21,6 +42,6 @@
 			<li><b><a href="{{ apstory.id }}">{% firstof apstory.headline apstory.title %}</a></b><br>Published: {{ apstory.published }}<br>Updated: {{ apstory.updated }}{% if apstory.contributor %}<br><b>{{ apstory.contributor }}</b>{% endif %}</li>
 		{% endif %}
 	{% endfor %}
-</ul>
-</body>
-</html>
+{% endblock content %}
+
+{% block footer_extra %}{{ page.extra|safe }}{% endblock footer_extra %}

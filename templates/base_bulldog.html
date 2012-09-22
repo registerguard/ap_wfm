@@ -1,0 +1,738 @@
+<!doctype html>
+<html class="no-js no-touch">
+
+<head>
+	
+	<meta charset="utf-8">
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+	
+	<title>{% block head_title %}{% endblock head_title %}{% block head_title_extra %} | The Register-Guard | Eugene, Oregon{% endblock head_title_extra %}</title>
+	<meta name="description" content="{% block head_description %}{% endblock head_description %}">
+	<meta name="keywords" content="{% block head_keywords %}{% endblock head_keywords %}">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	
+	<script src="http://assets.registerguard.com/v5.0/bulldog/js/head.js"></script>
+	
+	<link rel="stylesheet" href="http://assets.registerguard.com/v5.0/bulldog/css/bulldog.css">
+	<link rel="stylesheet" href="http://fonts.registerguard.com/type.css">
+	
+	<!--[if (lt IE 9) & (!IEMobile)]>
+		<script src="http://assets.registerguard.com/v5.0/bulldog/js/plugins/respond.min.js"></script>
+	<![endif]-->
+	
+	<!--[if lt IE 9]>
+		<script src="http://assets.registerguard.com/v5.0/bulldog/js/plugins/html5shiv.js"></script>
+	<![endif]-->
+	
+	{% block head_extra %}{% endblock head_extra %}
+	
+</head>
+<body>
+	
+	<div class="wiffle">
+		
+		<ul id="bd_ear" class="bd_scoop">
+			<li><time>{% now "l, N j, Y" %}</time></li>
+			<li><a href="http://homes.registerguard.com/">Homes</a></li>
+			<li><a href="http://registerguard.ca.kaango.com/feListAds/categoryID/902">Cars</a></li>
+			<li><a href="http://careers.registerguard.com/">Jobs</a></li>
+			<li><a href="http://registerguard.ca.kaango.com/">Classified</a></li>
+			<li><a href="http://e-edition.registerguard.com/">e-Edition</a></li>
+			<li><a href="http://services.registerguard.com/">Subscriber Services</a></li>
+			<li><a href="http://www.registerguard.com">Home</a></li>
+		</ul> <!-- /#bd_ear -->
+		
+		<header id="bd_masthead">
+			
+			<h1 id="bd_flag"><a href="http://www.registerguard.com">The Register-Guard</a></h1>
+			
+			<div id="forecast"></div>
+			
+			<nav id="bd_proof">
+				
+				<h1 class="bd_cut">Navigation</h1>
+				
+				<ul id="megawhale" class="mw-ul">
+					
+					<li class="mw-li">
+						
+						<a class="mw-a" href="http://www.registerguard.com">News</a>
+						
+						<div class="mw-div">
+							
+							<div class="w_line">
+								
+								<div class="w_unit w_C1of4">
+									
+									<ul class="bd_scoop">
+										<li><a href="#">News Tips</a></li>
+										<li><a href="#">Maps</a></li>
+										<li><a href="#">Springfield Extra</a></li>
+										<li><a href="#">Obituaries</a></li>
+										<li><a href="#">Latest Seven Days</a></li>
+										<li><a href="#">Weather</a></li>
+										<li><a href="#">Northwest Now</a></li>
+										<li><a href="#">Columnist Bob Welch</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+								<div class="w_unit w_C1of4">
+									
+									<h2 class="bd_insert">Blogs</h2>
+									
+									<ul class="bd_scoop">
+										<li><a href="#">Close to Home</a></li>
+										<li><a href="#">School Lane</a></li>
+										<li><a href="#">Coupon Chat</a></li>
+										<li><a href="#">Ticket Files</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+								<div class="w_unit w_C1of4">
+									
+									<h2 class="bd_insert">Associated Press</h2>
+									
+									<ul class="bd_scoop">
+										<li><a href="#">Top Stories</a></li>
+										<li><a href="#">Northwest Now</a></li>
+										<li><a href="#">Business</a></li>
+										<li><a href="#">Technology</a></li>
+										<li><a href="#">Entertainment</a></li>
+										<li><a href="#">Politics</a></li>
+										<li><a href="#">Weather</a></li>
+										<li><a href="#">U.S.</a></li>
+										<li><a href="#">World</a></li>
+										<li><a href="#">Mideast</a></li>
+										<li><a href="#">Iraq</a></li>
+										<li><a href="#">Afghanistan</a></li>
+										<li><a href="#">Health</a></li>
+										<li><a href="#">Science</a></li>
+										<li><a href="#">Offbeat</a></li>
+										<li><a href="#">Podcasts</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+								<div class="w_unit w_C1of4 w_Cfix">
+									
+									<h2 class="bd_insert">Follow us on Facebook</h2>
+									
+									<ul class="bd_scoop">
+										<li><a href="#">fb.com/registerguard</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+									<h2 class="bd_insert">Follow us on Twitter</h2>
+									
+									<ul class="bd_scoop">
+										<li><a href="#">@registerguard</a></li>
+										<li><a href="#">@rgupdates</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+							</div> <!-- /.w_line -->
+							
+						</div> <!-- /.mw-div -->
+						
+					</li> <!-- /.mw-li -->
+					
+					<li class="mw-li">
+						
+						<a class="mw-a" href="#">Sports</a>
+						
+						<div class="mw-div">
+								
+								<div class="w_line">
+									
+									<div class="w_unit w_C1of4">
+										
+										<ul class="bd_scoop">
+											<li><a href="#">Local</a></li>
+											<li><a href="#">Oregon Football</a></li>
+											<li><a href="#">Postgame Brew</a></li>
+											<li><a href="#">Oregon Basketball</a></li>
+											<li><a href="#">Track &amp; Field</a></li>
+											<li><a href="#">Preps</a></li>
+											<li><a href="#">Outdoors</a></li>
+											<li><a href="#">Golf</a></li>
+											<li><a href="#">Columnist George Schroeder</a></li>
+										</ul> <!-- /.bd_scoop -->
+										
+									</div> <!-- /.w_unit -->
+									
+									<div class="w_unit w_C1of4">
+										
+										<h2 class="bd_insert">Blogs</h2>
+										
+										<ul class="bd_scoop">
+											<li><a href="#">Oregon Football</a></li>
+											<li><a href="#">Opinions on Sports</a></li>
+											<li><a href="#">Track & Field</a></li>
+											<li><a href="#">Talkin' Baseball</a></li>
+											<li><a href="#">Oregon Men's Basketball</a></li>
+											<li><a href="#">College Football</a></li>
+											<li><a href="#">Xs &amp; Os</a></li>
+											<li><a href="#">Oregon Women's Basketball</a></li>
+											<li><a href="#">Prep Sports</a></li>
+										</ul> <!-- /.bd_scoop -->
+										
+									</div> <!-- /.unit -->
+									
+									<div class="w_unit w_C1of4">
+										
+										<h2 class="bd_insert">Associated Press Sports</h2>
+										
+										<ul class="bd_scoop">
+											<li><a href="#">MLB</a> | <a href="#">Scoreboard</a></li>
+											<li><a href="#">NFL</a> | <a href="#">Scoreboard</a></li>
+											<li><a href="#">NCAA</a> | <a href="#">Scoreboard</a></li>
+											<li><a href="#">NBA</a> | <a href="#">Scoreboard</a></li>
+											<li><a href="#">NCAA Men's Basketball</a> | <a href="#">Scoreboard</a></li>
+											<li><a href="#">NCAA Women's Basketball</a> | <a href="#">Scoreboard</a></li>
+											<li><a href="#">Golf</a> | <a href="#">Leaderboard</a></li>
+											<li><a href="#">NHL</a> | <a href="#">Scoreboard</a></li>
+										</ul> <!-- /.bd_scoop -->
+										
+									</div> <!-- /.w_unit -->
+									
+									<div class="w_unit w_C1of4 w_Cfix">
+										
+										<h2 class="bd_insert">Follow us on Facebook</h2>
+										
+										<ul class="bd_scoop">
+											<li><a href="#">fb.com/registerguard</a></li>
+										</ul>
+										
+										<h2 class="bd_insert">Follow us on Twitter</h2>
+										
+										<ul class="bd_scoop">
+											<li><a href="#">@duckfootball</a></li>
+											<li><a href="#">@rgsports</a></li>
+											<li><a href="#">@rgoutdoors</a></li>
+											<li><a href="#">@rgduckbball</a></li>
+											<li><a href="#">@georgeschroeder</a></li>
+											<li><a href="#">@candersonrg</a></li>
+											<li><a href="#">@adamjude_rg</a></li>
+										</ul> <!-- /.bd_scoop -->
+										
+									</div> <!-- /.w_unit -->
+									
+								</div> <!-- /.w_line -->
+							
+						</div> <!-- /.mw-div -->
+						
+					</li> <!-- /.mw-li -->
+					
+					<li class="mw-li">
+						
+						<a class="mw-a" href="#">Business</a>
+						
+						<div class="mw-div">
+							
+							<div class="w_line">
+								
+								<div class="w_unit w_C1of4">
+									
+									<ul class="bd_scoop">
+										<li><a href="#">Local</a></li>
+										<li><a href="#">Stock Lookup</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+								<div class="w_unit w_C1of4">
+									
+									<ul class="bd_scoop">
+										<li><a href="#">Investor Tools</a></li>
+										<li><a href="#">Business Spotlight</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.unit -->
+								
+								<div class="w_unit w_C1of4">
+									
+									<ul class="bd_scoop">
+										<li><a href="#">Business Directory</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+								<div class="w_unit w_C1of4 w_Cfix">
+									
+									<h2 class="bd_insert">Follow us on Facebook</h2>
+									
+									<ul class="bd_scoop">
+										<li><a href="#">fb.com/registerguard</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+									<h2 class="bd_insert">Follow us on Twitter</h2>
+									
+									<ul class="bd_scoop">
+										<li><a href="#">@rgbusiness</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+							</div> <!-- /.w_line -->
+							
+						</div> <!-- /.mw-div -->
+						
+					</li> <!-- /.mw-li -->
+					
+					<li class="mw-li">
+						
+						<a class="mw-a" href="#">Opinion</a>
+						
+						<div class="mw-div">
+							
+							<div class="w_line">
+								
+								<div class="w_unit w_C1of4">
+									
+									<ul class="bd_scoop">
+										<li><a href="#">Editorials</a></li>
+										<li><a href="#">Letters</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+								<div class="w_unit w_C1of4">
+									
+									<ul class="bd_scoop">
+										<li><a href="#">Guest Viewpoint</a></li>
+										<li><a href="#">Contribute your Opinion</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+								<div class="w_unit w_C1of4">
+									
+									<ul class="bd_scoop">
+										<li><a href="#">Election 2012</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+								<div class="w_unit w_C1of4 w_Cfix">
+									
+									<h2 class="bd_insert">Follow us on Facebook</h2>
+									
+									<ul class="bd_scoop">
+										<li><a href="#">fb.com/registerguard</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+									<h2 class="bd_insert">Follow us on Twitter</h2>
+									
+									<ul class="bd_scoop">
+										<li><a href="#">@rgopinion</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+							</div> <!-- /.w_line -->
+							
+						</div> <!-- /.mw-div -->
+						
+					</li> <!-- /.mw-li -->
+					
+					<li class="mw-li">
+						
+						<a class="mw-a" href="#">Life</a>
+						
+						<div class="mw-div">
+							
+							<div class="w_line">
+								
+								<div class="w_unit w_C1of4">
+									
+									<ul class="bd_scoop">
+										<li><a href="#">Lifestyles</a></li>
+										<li><a href="#">Food</a></li>
+										<li><a href="#">Tastings</a></li>
+										<li><a href="#">Health &amp; Fitness</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+								<div class="w_unit w_C1of4">
+									
+									<ul class="bd_scoop">
+										<li><a href="#">Dash</a></li>
+										<li><a href="#">Home &amp; Garden</a></li>
+										<li><a href="#">Outdoors</a></li>
+										<li><a href="#">Discovery</a></li>
+										<li><a href="#">Parade</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+								<div class="w_unit w_C1of4">
+									
+									<h2 class="bd_insert">Blogs</h2>
+									
+									<ul class="bd_scoop">
+										<li><a href="#">Coupon Chat</a></li>
+										<li><a href="#">Ticket Files</a></li>
+										<li><a href="#">Close to Home</a></li>
+										<li><a href="#">School Lane</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+								<div class="w_unit w_C1of4 w_Cfix">
+									
+									<h2 class="bd_insert">Follow us on Facebook</h2>
+									
+									<ul class="bd_scoop">
+										<li><a href="#">fb.com/registerguard</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+									<h2 class="bd_insert">Follow us on Twitter</h2>
+									
+									<ul class="bd_scoop">
+										<li><a href="#">@rgliving</a></li>
+										<li><a href="#">@rgtastings</a></li>
+										<li><a href="#">@rgentree</a></li>
+										<li><a href="#">@rgoutdoors</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+							</div> <!-- /.w_line -->
+							
+						</div> <!-- /.mw-div -->
+						
+					</li> <!-- /.mw-li -->
+					
+					<li class="mw-li">
+						
+						<a class="mw-a" href="#">Entertainment</a>
+						
+						<div class="mw-div">
+							
+							<div class="w_line">
+								
+								<div class="w_unit w_C1of4">
+									
+									<ul class="bd_scoop">
+										<li><a href="#">Arts</a></li>
+										<li><a href="#">Entertainment</a></li>
+										<li><a href="#">TV Listings</a></li>
+										<li><a href="#">Movie Listings</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+								<div class="w_unit w_C1of4">
+									
+									<ul class="bd_scoop">
+										<li><a href="#">Go Entertainment</a></li>
+										<li><a href="#">Happy Hours</a></li>
+										<li><a href="#">Entertainment Newsletter</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+								<div class="w_unit w_C1of4">
+									
+									<h2 class="bd_insert">Blogs</h2>
+									
+									<ul class="bd_scoop">
+										<li><a href="#">Ticket Files</a></li>
+										<li><a href="#">Coupon Chat</a></li>
+										<li><a href="#">Close to Home</a></li>
+										<li><a href="#">School Lane</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+								<div class="w_unit w_C1of4 w_Cfix">
+									
+									<h2 class="bd_insert">Follow us on Facebook</h2>
+									
+									<ul class="bd_scoop">
+										<li><a href="#">fb.com/registerguard</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+									<h2 class="bd_insert">Follow us on Twitter</h2>
+									
+									<ul class="bd_scoop">
+										<li><a href="#">@registerguard</a></li>
+										<li><a href="#">@rgarts</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+							</div> <!-- /.w_line -->
+							
+						</div> <!-- /.mw-div -->
+						
+					</li> <!-- /.mw-li -->
+					
+					<li class="mw-li">
+						
+						<a class="mw-a" href="#">Obituaries</a>
+						
+						<div class="mw-div">
+							
+							<div class="w_line">
+								
+								<div class="w_unit w_C1of4">
+									
+									<ul class="bd_scoop">
+										<li><a href="#">Obituary Archive</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+								<div class="w_unit w_C1of4">
+									
+									<ul class="bd_scoop">
+										<li><a href="#">Family Tributes</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+								<div class="w_unit w_C1of4">
+									
+									<ul class="bd_scoop">
+										<li><a href="#">Sponsored Tributes</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+								<div class="w_unit w_C1of4 w_Cfix">
+									
+									<ul class="bd_scoop">
+										<li><a href="#">How to Submit an Obituary</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+							</div> <!-- /.w_line -->
+							
+						</div> <!-- /.mw-div -->
+						
+					</li> <!-- /.mw-li -->
+					
+					<li class="mw-li">
+						
+						<a class="mw-a" href="#">Multimedia</a>
+						
+						<div class="mw-div">
+							
+							<div class="w_line">
+								
+								<div class="w_unit w_C1of4">
+									
+									<ul class="bd_scoop">
+										<li><a href="#">xxxx</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+								<div class="w_unit w_C1of4">
+									
+									<ul class="bd_scoop">
+										<li><a href="#">xxxx</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+								<div class="w_unit w_C1of4">
+									
+									<ul class="bd_scoop">
+										<li><a href="#">xxxx</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+								<div class="w_unit w_C1of4 w_Cfix">
+									
+									<ul class="bd_scoop">
+										<li><a href="#">xxxx</a></li>
+									</ul> <!-- /.bd_scoop -->
+									
+								</div> <!-- /.w_unit -->
+								
+							</div> <!-- /.w_line -->
+							
+						</div> <!-- /.mw-div -->
+						
+					</li> <!-- /.mw-li -->
+					
+					<li class="mw-li mw-li-orphan">
+						
+						<a class="mw-a" href="#">Search</a>
+						
+						<div class="mw-div">
+							
+							<p>search here...</p>
+							
+						</div> <!-- /.mw-div -->
+						
+					</li> <!-- /.mw-li -->
+					
+				</ul> <!-- /#megawhale -->
+				
+			</nav> <!-- /#bd_proof -->
+			
+		</header> <!-- /#bd_masthead -->
+		
+		<div id="bd_content">
+		<!-- ##### BEGIN CONTENT AREA ##### -->
+			
+			{% block body %}
+				
+				<div class="w_row">
+					
+					<div class="w_col w_B300 w_C640 w_D980 w_Bla w_Cla w_Dla">
+						
+						{% block content %}{% endblock content %}
+						
+					</div> <!-- /.w_col -->
+					
+					<div class="w_col w_B300 w_Blb w_Clb w_Dlb">
+						
+						{% block secondary %}{% endblock secondary %}
+						
+					</div> <!-- /.w_col -->
+					
+				</div> <!-- /.w_row -->
+				
+			{% endblock body %}
+			
+		<!-- ##### END CONTENT AREA ##### -->
+		</div> <!-- /#bd_content -->
+		
+		<footer id="bd_morgue">
+			
+			<h1 class="bd_cut">Quick links</h1>
+			
+			<div class="w_row">
+				
+				<div class="w_col w_B300 w_C470 w_D300">
+					
+					<section>
+						
+						<h2 class="bd_insert">Submit</h2>
+						
+						<ul class="bd_scoop">
+							<li><a href="#">News tips</a></li>
+							<li><a href="#">Community events</a></li>
+							<li><a href="#">Letters to the editor</a></li>
+							<li><a href="#">Births / Weddings / Obituaries</a></li>
+							<li><a href="#">Education Extra</a></li>
+							<li><a href="#">Volunteer of the month</a></li>	
+							<li><a href="#">Contact the newsroom</a></li>		
+						</ul> <!-- /.bd_scoop -->
+						
+					</section>
+					
+				</div> <!-- /.w_col -->
+				
+				<div class="w_col w_B300 w_C470 w_D300">
+					
+					<section>
+						
+						<h2 class="bd_insert">Connect</h2>
+						
+						<ul class="bd_scoop">
+							<li><a href="#">Promotions / Contests</a></li>
+							<li><a href="#">Email newsletters</a></li>
+							<li><a href="#">Facebook</a></li>
+							<li><a href="#">Twitter</a></li>
+							<li><a href="#">Mobile apps</a></li>
+							<li><a href="#">Happy Hours</a></li>
+							<li><a href="#">Community Solutions</a></li>
+							<li><a href="#">Support Services</a></li>
+							<li><a href="#">About us</a></li>
+							<li><a href="#">Give us feedback</a></li>
+							<li><a href="#">Contact The Register-Guard</a></li>
+						</ul> <!-- /.bd_scoop -->
+						
+					</section>
+					
+				</div> <!-- /.w_col -->
+				
+				<div class="w_col w_B300 w_C470 w_D300 w_Bc w_Cc">
+					
+					<section>
+						
+						<h2 class="bd_insert">Marketplace</h2>
+						
+						<ul class="bd_scoop">
+							<li><a href="#">Buy a photo</a></li>
+							<li><a href="#">Display Advertising</a></li>
+							<li><a href="#">Advertising rates</a></li>
+							<li><a href="#">Classified Advertising</a></li>
+							<li><a href="#">Place a Classified ad</a></li>
+							<li><a href="#">Jobs at The Register-Guard</a></li>
+							<li><a href="#">Contact Advertising</a></li>
+						</ul> <!-- /.bd_scoop -->
+						
+					</section>
+					
+				</div> <!-- /.w_col -->
+				
+				<div class="w_col w_B300 w_C470 w_D300">
+					
+					<section>
+						
+						<h2 class="bd_insert">Subscriber Services</h2>
+						
+						<div id="bd_daily"><a href="http://e-edition.registerguard.com">Today's front page</a></div>
+						
+						<ul class="bd_scoop">
+							<li><a href="#">Subscribe</a></li>
+							<li><a href="#">E-Edition</a></li>
+							<li><a href="#">Manage your account</a></li>
+							<li><a href="#">Archive</a></li>
+							<li><a href="#">Back issues</a></li>
+							<li><a href="#">Contact Subscriber Services</a></li>
+						</ul> <!-- /.bd_scoop -->
+						
+					</section>
+					
+				</div> <!-- /.w_col -->
+				
+			</div> <!-- /.row -->
+			
+			<div id="bd_press">
+				
+				<p><span>The Register-Guard <span>&bull;</span></span> <span><a href="http://g.co/maps/h6sgk">3500 Chad Drive</a> &bull; Eugene, OR &bull; 97408 <span>/</span></span> <span>(541) 485-1234 <span>/</span> <a href="#">Feedback</a></span></p>
+				
+				<p><span>Copyright &copy; 1996&ndash;2012 <span>/</span></span> <span><a href="#">Terms</a> <span>/</span> <a href="#">Privacy</a> <span>/</span> <a href="#">Copyright</a></span></p>
+				
+			</div> <!-- /#bd_press -->
+			
+		</footer> <!-- /#bd_morgue -->
+		
+	</div> <!-- /.wiffle -->
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="http://assets.registerguard.com/v5.0/bulldog/js/plugins/ios-orientationchange-fix.js"></script>
+	<script src="http://assets.registerguard.com/v5.0/bulldog/js/plugins/jquery.ba-dotimeout.js"></script>
+	<script src="http://assets.registerguard.com/v5.0/bulldog/js/plugins/jquery.megawhale-0.1.0.js"></script>
+	<script src="http://assets.registerguard.com/v5.0/bulldog/js/plugins/jquery.megakrill-0.1.0.js"></script>
+	<script src="http://assets.registerguard.com/v5.0/bulldog/js/plugins/jquery.harmonia-0.1.0.js"></script>
+	<script src="http://assets.registerguard.com/v5.0/bulldog/js/plugins/jquery.jsonp-2.4.0.min.js"></script>
+	<script src="http://assets.registerguard.com/v5.0/bulldog/js/bulldog.js"></script>
+	<script src="http://assets.registerguard.com/v5.0/bulldog/js/modules.js"></script>
+	<script src="http://assets.registerguard.com/v5.0/bulldog/js/init.js"></script>
+	
+	{% block footer_extra %}{% endblock footer_extra %}
+	
+	{% block footer_last %}
+		
+		{% include "dox/includes/footer_last.html" %}
+		
+	{% endblock footer_last %}
+	
+</body>
+</html>
