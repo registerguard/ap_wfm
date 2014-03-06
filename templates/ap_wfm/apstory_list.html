@@ -1,26 +1,3 @@
-{% load thumbnail_tags %}
-<html>
-<head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-</head>
-<body>
-<h1>Stories</h1>
-<ul>
-	{% for apstory in object_list %}
-		{% if apstory.image_set.all %}
-			<li><b><a href="{{ apstory.id }}">{% firstof apstory.headline apstory.title %}</a></b>
-			{# {% comment %} #}
-			{% for ap_image in apstory.image_set.all %}
-				<br/><img src="http://uploads.registerguard.com/{% thumbnail ap_image.image 100 100 %}" />
-			{% endfor %}
-			{# {% endcomment %} #}
-			<br>Published: {{ apstory.published }}<br>Updated: {{ apstory.updated }}
-			{% if apstory.contributor %}<br><b>{{ apstory.contributor }}</b>{% endif %}
-			</li>
-		{% else %}
-			<li><b><a href="{{ apstory.id }}">{% firstof apstory.headline apstory.title %}</a></b><br>Published: {{ apstory.published }}<br>Updated: {{ apstory.updated }}{% if apstory.contributor %}<br><b>{{ apstory.contributor }}</b>{% endif %}</li>
-		{% endif %}
-	{% endfor %}
-</ul>
-</body>
-</html>
+{% for apstory in object_list %}
+	<li><a href="http://{{ current_site }}{% url ap_story_detail apstory.category.all.0 apstory.slug %}">{% firstof apstory.headline apstory.title %}</a></li>
+{% endfor %}

@@ -1,0 +1,194 @@
+{% extends "dox/bulldog_story.html" %}
+{% load thumbnail_tags %}
+{% load footer_links %}
+{% block head_title %}{{ object.headline }}{% endblock head_title %}
+
+{% block head_extra %}
+	
+	{{ block.super }}
+	
+{% endblock head_extra %}
+
+{% block location %}
+	
+	{% if page.title or page.description_short %}
+		
+		<header>
+			
+			<div id="loc">
+				
+				<hgroup>
+					
+					<div class="streamer">
+						
+						<h1><span>{% block location_title %}{% if page.title %}{{ page.title|safe }}{% else %}&nbsp;{% endif %}{% endblock location_title %}</span></h1>
+						<h2>{% block location_description %}{% if page.description_short %}<a href="{% url ap_topic_index page.cat 20 %}">{{ page.description_short|safe }}</a>{% else %}&nbsp;{% endif %}{% endblock location_description %}</h2>
+						
+					</div> <!-- /.streamer -->
+					
+				</hgroup>
+				
+			</div> <!-- /#loc -->
+			
+		</header>
+		
+	{% endif %}
+	
+{% endblock location %}
+
+{% block body %}
+	
+	{% autoescape off %}
+	<article>
+		
+		<header>
+			
+			<div class="w_row">
+				
+				<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
+			
+				<div class="w_col w_C640 w_D980">
+				
+					<div class="wrap give">
+				
+						<hgroup>
+					
+							<h1><a href="{% url ap_story_detail object.category.all.0 object.slug %}">{{ object.headline }}</a></h1>
+					
+						</hgroup>
+				
+					</div> <!-- /.wrap -->
+				
+				</div> <!-- /.w_col -->
+				
+				<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
+				
+			</div> <!-- /.w_col -->
+			
+			<hr>
+			
+			{% if object.image_count %}
+			
+			{% with object.image_set.all as all_story_images %}
+			
+			<section>
+			
+				<div class="w_row">
+				
+					<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
+					
+					<div class="w_col w_C640 w_D980">
+						
+						<hgroup>
+							
+							<div class="streamer alt3" style="margin-top:0">
+							
+								<h1><span>Multimedia</span></h1>
+								
+								<h2 id="photo"><span>Photo{{ all_story_images|pluralize }}</span></h2>
+								
+							</div> <!-- /.streamer -->
+							
+						</hgroup>
+						
+						{% for story_image in all_story_images %}
+						
+						<figure>
+						
+						
+							<img id="img_{{ story_image.id }}" src="{{ MEDIA_URL }}{% thumbnail story_image.image 980 100000 %}">
+						
+							<figcaption>
+							
+								<div class="fix">
+								
+									<p class="caption" style="margin-bottom: 0">{{ story_image.caption }}</p>
+								
+								</div> <!-- /.fix -->
+							
+							</figcaption>
+						
+						</figure>
+						
+						{% if not forloop.last %}<hr>{% endif %}
+							
+						{% endfor %}
+						
+					</div> <!-- /.w_col -->
+					
+					<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
+					
+				</div> <!-- /.w_row -->
+				
+			</section>
+			
+			{% endwith %}
+			
+			{% endif %}
+			
+{% comment %}
+	<hr>
+	
+	<div class="w_row">
+		
+		<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
+		
+		<div class="w_col w_C640 w_D980">
+		
+			<section id="other_stories" class="kerplopped">
+				<!-- {% debug %}-->
+				<h1 class="head"><a href="{% url ap_topic_index page.cat 20 %}">More {{ page.title }} stories</a></h1>
+				
+				{% get_latest ap_wfm.APStory 5 as latest_stories %}
+				
+				{% for latest_story in latest_stories %}
+					<article>
+						
+						<div class="force">
+							
+							<header>
+								
+								<hgroup>
+									
+									<h1 class="h5">
+										
+										<a href="">{{ latest_story.headline }}</a>
+										
+									</h1>
+									
+								</hgroup>
+								
+							</header>
+							
+						</div> <!-- /.force -->
+						
+					</article>
+					
+					<hr>
+					
+				{% endfor %}
+				
+			</section>
+		
+		</div>
+		
+		<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
+		
+	</div> <!-- /.w_row -->
+{% endcomment %}	
+	<footer>
+		&nbsp;
+	</footer>
+	
+	{% endautoescape %}
+	
+{% endblock body %}
+
+{% block footer_extra %}
+<script>$(document).ready(function(){$.ad_manager({parent:'news',section:'local',page:'story'});});</script>
+
+<!-- http://www.addthis.com/services/list -->
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=registerguard"></script>
+{% endblock footer_extra %}
+
+{# Map AP categories to Ad Manager - Note by Patrick#}

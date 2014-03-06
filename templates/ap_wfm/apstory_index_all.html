@@ -1,0 +1,54 @@
+{% extends "dox/bulldog.html" %}
+{% load thumbnail_tags %}
+
+{% block head_title %}{{ page.title|title }} | The Associated Press{% endblock head_title %}
+
+{% block content %}
+
+<section>
+	
+	<h1 id="archive" class="head head1 give">The very latest from across The Associated Press</h1>
+	
+	{% for apstory in object_list %}
+	<article>
+	
+		<div class="force">
+		
+			<header>
+			
+				<hgroup>
+				
+					<h3 class="label">{{ apstory.location }} | {{ apstory.contributor }}</h3>
+				
+					<h1 class="h5">
+						<a href="http://{{ current_site }}{% url ap_story_detail apstory.category.all.0 apstory.slug %}">{% firstof apstory.headline apstory.title %}</a>
+					</h1>
+				
+					<h2 class="sh6">
+					
+						<a href="http://{{ current_site }}{% url ap_story_detail apstory.category.all.0 apstory.slug %}">{{ apstory.updated }}</a>
+					
+					</h2>
+				
+				</hgroup>
+			
+			</header>
+			
+			<div class="fix">
+				
+				{% if apstory.image_count > 0 %}
+				<img src="{{ MEDIA_URL }}{% thumbnail apstory.image_set.all.0.image 100 100 %}" alt="{{ apstory.image_set.0.alt_text }}">
+				{% endif %}
+				
+			</div>
+		
+		</div>
+	
+	</article>
+	
+	<hr>
+	{% endfor %}
+	
+</section>
+
+{% endblock content %}
