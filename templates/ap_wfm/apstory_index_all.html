@@ -10,6 +10,7 @@
 	<h1 id="archive" class="head head1 give">The very latest from across The Associated Press</h1>
 	
 	{% for apstory in object_list %}
+
 		{% if apstory.category.all.0 %}
 			<article>
 	
@@ -49,6 +50,7 @@
 	
 			<hr>
 		{% endif %}
+	
 	{% endfor %}
 	
 </section>
