@@ -1,0 +1,79 @@
+{% extends "dox/bulldog.html" %}
+
+{% block head_title %}{{ page.title|title }} | {{ page.description_short }}{% endblock head_title %}
+
+{% block body %}
+
+	<div class="w_row">
+		
+		<div class="w_col w_B300 w_C640 w_D980">
+			
+			{# This HTML5 markup needs to be reconsidered. #}
+			
+			<section>
+				
+				<h1 class="off">Latest Pacific Northwest news from The Associated Press</h1>
+				
+				<div class="w_row">
+					
+					<div class="w_col w_C300 w_D470 Bla Cla Dla">
+						
+						<div class="wrap give">
+							
+							<h2 class="reverse reverse1">Latest Oregon news</h2>
+							
+							{% for story in object_list %}
+								
+								<article>
+									
+									<h1 class="h5"><a href="{% url ap_story_detail story.category.all.0 story.slug %}">{{ story.headline }}</a></h1>
+									
+									<p>{{ story.body|safe|striptags|truncatewords:25 }}</p>
+									
+									<p class="pub pub1">updated: {{ story.updated|date:"P, N j" }}</p>
+									
+								</article>
+								
+								<hr>
+								
+							{% endfor %}
+							
+						</div> <!-- /.wrap -->
+						
+					</div> <!-- .w_col -->
+					
+					<div class="w_col w_C300 w_D470 Blb Clb Dlb">
+						
+						<div class="wrap give">
+							
+							<h2 class="reverse reverse1">Latest Washington news</h2>
+							
+							{% for story in wash_stories %}
+								
+								<article>
+									
+									<h1 class="h5"><a href="{% url ap_story_detail story.category.all.0 story.slug %}">{{ story.headline }}</a></h1>
+									
+									<p>{{ story.body|safe|striptags|truncatewords:25 }}</p>
+									
+									<p class="pub pub1">updated: {{ story.updated|date:"P, N j" }}</p>
+									
+								</article>
+								
+								<hr>
+								
+							{% endfor %}
+							
+						</div> <!-- /.wrap -->
+						
+					</div> <!-- .w_col -->
+					
+				</div> <!-- .w_row -->
+					
+			</section>
+			
+		</div> <!-- .w_col -->
+		
+	</div> <!-- .w_row -->
+	
+{% endblock body %}

@@ -1,0 +1,27 @@
+{% extends "dox/bulldog.html" %}
+
+{% block head_title %}{{ page.title|title }} | The Associated Press{% endblock head_title %}
+
+{% block body %}
+	
+	<div class="give">
+	
+		{% for story in object_list %}
+		
+			<article>
+			
+				<h1 class="h5"><a href="{% url ap_story_detail story.category.all.0 story.slug %}">{{ story.headline }}</a></h1>
+			
+				<p>{{ story.body|safe|striptags|truncatewords:25 }}</p>
+				<!-- category: {{ category }}; current_site: {{ current_site }} -->
+				<p class="pub pub1">updated: {{ story.updated|date:"P, N j" }}</p>
+			
+			</article>
+		
+			<hr>
+		
+		{% endfor %}
+	
+	</div> <!-- /.wrap -->
+	
+{% endblock body %}

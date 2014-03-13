@@ -1,0 +1,308 @@
+{% extends "dox/bulldog_story.html" %}
+{% load thumbnail_tags %}
+{% load footer_links %}
+{% block head_title %}{{ object.headline }}{% endblock head_title %}
+
+{% block head_extra %}
+	
+	{{ block.super }}
+	
+{% endblock head_extra %}
+
+{% block location %}
+	
+	<!-- page.cat: {{ page.cat }} -->
+	
+	{% if page.title or page.description_short %}
+		
+		<header>
+			
+			<div id="loc">
+				
+				<hgroup>
+					
+					<div class="streamer">
+						
+						<h1><span>{% block location_title %}{% if page.title %}{{ page.title|safe }}{% else %}&nbsp;{% endif %}{% endblock location_title %}</span></h1>
+						<h2>{% block location_description %}{% if page.description_short %}<a href="{% url ap_topic_index page.cat 20 %}">{{ page.description_short|safe }}</a>{% else %}&nbsp;{% endif %}{% endblock location_description %}</h2>
+						
+					</div> <!-- /.streamer -->
+					
+				</hgroup>
+				
+			</div> <!-- /#loc -->
+			
+		</header>
+		
+	{% endif %}
+	
+{% endblock location %}
+
+{% block body %}
+	
+	{% autoescape off %}
+	<article>
+		
+		<header>
+			
+			<div class="w_row">
+				
+				<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
+			
+				<div class="w_col w_C640 w_D980">
+				
+					<div class="wrap give">
+				
+						<hgroup>
+					
+							<h1>{{ object.headline }}</h1>
+					
+						</hgroup>
+				
+					</div> <!-- /.wrap -->
+				
+				</div> <!-- /.w_col -->
+				
+				<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
+				
+			</div> <!-- /.w_row -->
+			
+			<hr>
+			
+			{% if object.image_count %}
+			
+			<section>
+			
+				<div class="w_row">
+				
+					<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
+					
+					<div class="w_col w_C640 w_D980">
+						
+						<hgroup>
+							
+							<div class="streamer alt3" style="margin-top:0">
+								
+								<h1><a href="{% url ap_story_multimedia page.cat object.slug %}">Multimedia</a></h1>
+								
+								<h2 id="photo"><a href="#">Photo{{ all_story_images|pluralize }}</a></h2>
+								
+							</div> <!-- /.streamer -->
+							
+						</hgroup>
+						
+						<figure>
+						
+						{% with object.image_set.all as all_story_images %}
+						
+						{% for story_image in all_story_images %}
+							
+							{% if forloop.first %}
+							
+							<a href="{% url ap_story_multimedia page.cat object.slug %}#img_{{ story_image.id }}">
+								<img src="{{ MEDIA_URL }}{% thumbnail story_image.image 980 100000 %}">
+							</a>
+							
+							<figcaption>
+								
+								<div class="fix">
+									
+									<p class="caption" style="margin-bottom: 0">{{ story_image.caption }}</p>
+									
+								</div> <!-- /.fix -->
+								
+							</figcaption>
+							
+							{% endif %}
+							
+						{% endfor %}
+						
+						</figure>
+						
+						{% if forloop.last %}<hr>{% endif %}
+						
+						{% if not forloop.first and all_story_images|length > 1 %}
+						
+						<hr>
+						
+						<figure>
+							
+							<div class="pics">
+							
+							{% for story_image in all_story_images %}
+								{% if not forloop.first %}
+								
+								<div class="pics-pic" style="background-image: url({{ MEDIA_URL }}{% thumbnail story_image.image 100 100 %})">
+									<a href="{% url ap_story_multimedia page.cat object.slug %}#img_{{ story_image.id }}">&nbsp;</a>
+								</div>
+								
+								{% endif %}
+							{% endfor %}
+								
+							</div> <!-- /.pics -->
+							
+						</figure>
+							
+						{% endif %}
+						
+						{% endwith %}
+						
+					</div> <!-- /.w_col -->
+					
+					<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
+					
+				</div> <!-- /.w_row -->
+				
+			</section>
+			
+			<hr>
+			
+			{% endif %}
+			
+			<div class="w_row">
+				
+				<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
+				
+				<div class="w_col w_C640 w_D980">
+					
+					<div class="fix">
+						
+						<div id="meta">
+							
+							<p class="byline name byline1">
+								{{ object.byline|lower|title }}
+							</p>
+							
+							<p class="byline organization byline2">
+								{% firstof object.byline_title object.contributor %}
+							</p>
+							
+							<p class="pub pub1">
+								Updated: <time pubdate datetime="{{ object.updated }}">{{ object.updated|date:"P, N j" }}</time>
+							</p>
+							
+							<!-- object published: {{ object.published }} object updated: {{ object.updated }} -->
+							
+						</div> <!-- /#meta -->
+						
+						<div class="sharing sharing-box_count addthis_toolbox">
+							<div class="sharing-item sharing-facebook"><a class="addthis_button_facebook_like" fb:like:layout="box_count" fb:like:width="48"></a></div>
+							<div class="sharing-item sharing-twitter"><a class="addthis_button_tweet" tw:count="vertical"></a></div>
+							<div class="sharing-item sharing-googleplus"><a class="addthis_button_google_plusone" g:plusone:size="tall"></a></div>
+							<div class="sharing-item sharing-linkedin"><a class="addthis_button_linkedin_counter" li:counter="top"></a></div>
+							<div class="sharing-item"><a class="addthis_counter"></a></div>
+						</div>
+						
+						<div class="sharing sharing-icons addthis_toolbox">
+							<div class="sharing-item"><script>var pfHeaderImgUrl = '';var pfHeaderTagline = '';var pfdisableClickToDel = 0;var pfHideImages = 0;var pfDisablePDF = 0;var pfDisableEmail = 0;var pfDisablePrint = 0;var pfCustomCSS = '';var pfBtVersion='1';(function(){var js, pf;pf = document.createElement('script');pf.type = 'text/javascript';if('https:' == document.location.protocol){js='https://pf-cdn.printfriendly.com/ssl/main.js'}else{js='http://cdn.printfriendly.com/printfriendly.js'}pf.src=js;document.getElementsByTagName('head')[0].appendChild(pf)})();</script><a href="http://www.printfriendly.com" onclick="window.print();return false;"><img src="http://cdn.printfriendly.com/pf-icon-small.gif" alt="Print Friendly and PDF" width="16" height="16"></a></div>
+							{# <div class="sharing-item"><a class="addthis_button_printfriendly"></a></div> #}
+							{# <div class="sharing-item"><a class="addthis_button_print"></a></div> #}
+							<div class="sharing-item"><a class="addthis_button_email"></a></div>
+							<div class="sharing-item"><a class="addthis_button_gmail"></a></div>
+							<div class="sharing-item"><a class="addthis_button_yahoomail"></a></div>
+							<div class="sharing-item"><a class="addthis_button_delicious"></a></div>
+							<div class="sharing-item"><a class="addthis_button_bitly"></a></div>
+							<div class="sharing-item"><a class="addthis_button_stumbleupon"></a></div>
+							<div class="sharing-item"><a class="addthis_button_reddit"></a></div>
+							<div class="sharing-item"><a class="addthis_button_digg"></a></div>
+							<div class="sharing-item"><a class="addthis_button_tumblr"></a></div>
+							<div class="sharing-item"><a class="addthis_button_blogger"></a></div>
+						</div>
+						
+					</div> <!-- /.fix -->
+					
+				</div> <!-- /.w_col -->
+				
+				<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
+			
+			</div> <!-- .w_row -->
+			
+		</header>
+		
+		<hr>
+		
+		<div class="w_row">
+			
+			<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
+			
+			<div class="w_col w_C640 w_D980">
+			
+				<div id="story">
+					
+					{{ object.body }}
+					
+				</div> <!-- /#story -->
+				
+			<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
+			
+			</div> <!-- /.w_col -->
+			
+		</div> <!-- /.w_row -->
+		
+	</article>
+{% comment %}
+	<hr>
+	
+	<div class="w_row">
+		
+		<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
+		
+		<div class="w_col w_C640 w_D980">
+		
+			<section id="other_stories" class="kerplopped">
+				<!-- {% debug %}-->
+				<h1 class="head"><a href="{% url ap_topic_index page.cat 20 %}">More {{ page.title }} stories</a></h1>
+				
+				{% get_latest ap_wfm.APStory 5 as latest_stories %}
+				
+				{% for latest_story in latest_stories %}
+					<article>
+						
+						<div class="force">
+							
+							<header>
+								
+								<hgroup>
+									
+									<h1 class="h5">
+										
+										<a href="">{{ latest_story.headline }}</a>
+										
+									</h1>
+									
+								</hgroup>
+								
+							</header>
+							
+						</div> <!-- /.force -->
+						
+					</article>
+					
+					<hr>
+					
+				{% endfor %}
+				
+			</section>
+		
+		</div>
+		
+		<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
+		
+	</div> <!-- /.w_row -->
+{% endcomment %}
+	<footer>
+		&nbsp;
+	</footer>
+	
+	{% endautoescape %}
+	
+{% endblock body %}
+
+{% block footer_extra %}
+<script>$(document).ready(function(){$.ad_manager({parent:'news',section:'local',page:'story'});});</script>
+
+<!-- http://www.addthis.com/services/list -->
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=registerguard"></script>
+{% endblock footer_extra %}
+
+{# Map AP categories to Ad Manager - Note by Patrick#}
