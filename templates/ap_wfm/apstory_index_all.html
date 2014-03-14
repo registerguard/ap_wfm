@@ -28,7 +28,7 @@
 				
 							<h2 class="sh6">
 					
-								<a href="http://{{ current_site }}{% url ap_story_detail apstory.category.all.0 apstory.slug %}">{{ apstory.updated }}</a>
+								<a href="http://{{ current_site }}{% url ap_story_detail apstory.category.all.0 apstory.slug %}">{{ apstory.updated }} ({{ apstory.updated|timesince }} ago)</a>
 					
 							</h2>
 				
