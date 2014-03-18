@@ -12,5 +12,8 @@ class APStoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'created', 'published', 'updated', 'keywords', 'title', 'headline', 'slugline', 'slug', 'categories', 'image_count', 'contributor', 'consumer_ready', 'subject_code', 'location',)
     list_filter = ('category', 'subject_code',)
     prepopulated_fields = {'slug': ('headline',)}
+    inlines = [
+        ImageInline,
+    ]
 
 admin.site.register(APStory, APStoryAdmin)
