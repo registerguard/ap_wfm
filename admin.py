@@ -4,7 +4,7 @@ from sorl.thumbnail.admin import AdminImageMixin
 
 class ImageInline(AdminImageMixin, admin.TabularInline):
     model = Image
-#     extra = 1
+    extra = 1
 
 class APStoryAdmin(admin.ModelAdmin):
     save_on_top = True
