@@ -2,9 +2,11 @@ from django.conf.urls.defaults import *
 from ap_wfm.views import APStoryListView, APStoryDetailView, \
 APCategoryCountListView, PortlandStocks, OregonSports, \
 OregonNewsNoSportsNoBizNoLott, Lotteries, json_view
-from ap_wfm.feeds import LatestEntries
+from ap_wfm.feeds import RssLatestEntries, AtomLatestEntries
 
 urlpatterns = patterns('',
+    (r'^feeds/rss/$', RssLatestEntries()),
+    (r'^feeds/atom/$', AtomLatestEntries()),
     url(r'^$', APStoryListView.as_view(), name='ap_story_index'),
     url(r'^lotteries/(?P<count>\d+)/$', Lotteries.as_view(template_name='ap_wfm/apstory_list.html'), name='lotteries'),
     url(r'^ore/(?P<count>\d+)/$', OregonNewsNoSportsNoBizNoLott.as_view(), name='oregon_news_no_sports_no_biz'),
@@ -18,5 +20,4 @@ urlpatterns = patterns('',
     url(r'^nwn/index/(?P<count>\d+)/$', APCategoryCountListView.as_view(template_name = 'ap_wfm/apstory_nwn_index.html'), name='northwest_now'),
     url(r'^oregon-sports/index/(?P<count>\d+)/$', OregonSports.as_view(template_name = 'ap_wfm/apstory_category_index.html'), name='oregon_sports_index'),
     url(r'^(?P<category>[a-z]+)/index/(?P<count>\d+)/$', APCategoryCountListView.as_view(template_name = 'ap_wfm/apstory_category_index.html'), name='ap_topic_index'),
-#     (r'^/feeds/rss/$', LatestEntries()),
 )
