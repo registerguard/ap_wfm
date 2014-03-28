@@ -53,7 +53,7 @@
 				
 						<hgroup>
 							
-							{% with first_category as object.category.all.0 %}
+							{% with first_category=object.category.all.0 %}
 							
 							<h1>{% if first_category %}<a href="{% url ap_story_detail first_category object.slug %}">{% endif %}{{ object.headline }}{% if first_category %}</a>{% endif %}</h1>
 							
