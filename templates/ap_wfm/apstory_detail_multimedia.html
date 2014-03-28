@@ -52,9 +52,13 @@
 					<div class="wrap give">
 				
 						<hgroup>
-					
-							<h1><a href="{% url ap_story_detail object.category.all.0 object.slug %}">{{ object.headline }}</a></h1>
-					
+							
+							{% with first_category as object.category.all.0 %}
+							
+							<h1>{% if first_category %}<a href="{% url ap_story_detail first_category object.slug %}">{% endif %}{{ object.headline }}{% if first_category %}</a>{% endif %}</h1>
+							
+							{% endwith %}
+							
 						</hgroup>
 				
 					</div> <!-- /.wrap -->
