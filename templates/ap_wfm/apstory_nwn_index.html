@@ -24,17 +24,21 @@
 							
 							{% for story in object_list %}
 								
-								<article>
-									
-									<h1 class="h5"><a href="{% url ap_story_detail story.category.all.0 story.slug %}">{{ story.headline }}</a></h1>
-									
-									<p>{{ story.body|safe|striptags|truncatewords:25 }}</p>
-									
-									<p class="pub pub1">updated: {{ story.updated|date:"P, N j" }}</p>
-									
-								</article>
+								{% if story.category.all.0 %}
 								
-								<hr>
+									<article>
+									
+										<h1 class="h5"><a href="{% url ap_story_detail story.category.all.0 story.slug %}">{{ story.headline }}</a></h1>
+									
+										<p>{{ story.body|safe|striptags|truncatewords:25 }}</p>
+									
+										<p class="pub pub1">updated: {{ story.updated|date:"P, N j" }}</p>
+									
+									</article>
+									
+									<hr>
+									
+								{% endif %}
 								
 							{% endfor %}
 							
@@ -50,17 +54,21 @@
 							
 							{% for story in wash_stories %}
 								
-								<article>
-									
-									<h1 class="h5"><a href="{% url ap_story_detail story.category.all.0 story.slug %}">{{ story.headline }}</a></h1>
-									
-									<p>{{ story.body|safe|striptags|truncatewords:25 }}</p>
-									
-									<p class="pub pub1">updated: {{ story.updated|date:"P, N j" }}</p>
-									
-								</article>
+								{% if story.category.all.0 %}
 								
-								<hr>
+									<article>
+									
+										<h1 class="h5"><a href="{% url ap_story_detail story.category.all.0 story.slug %}">{{ story.headline }}</a></h1>
+									
+										<p>{{ story.body|safe|striptags|truncatewords:25 }}</p>
+									
+										<p class="pub pub1">updated: {{ story.updated|date:"P, N j" }}</p>
+										
+									</article>
+									
+									<hr>
+									
+								{% endif %}
 								
 							{% endfor %}
 							
