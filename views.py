@@ -110,8 +110,6 @@ class APCategoryCountListView(ListView):
 
 class PortlandStocks(ListView):
     
-    template_name = 'ap_wfm/apstory_list.html'
-    
     def get_queryset(self):
         return APStory.objects.filter(category=15, subject_code='f').exclude(consumer_ready=False)[:self.kwargs['count']]
     
@@ -119,6 +117,7 @@ class PortlandStocks(ListView):
         context = super(PortlandStocks, self).get_context_data(**kwargs)
         context.update({
             'current_site': Site.objects.get_current(),
+            'page': {'title': 'the wire', 'description_short': 'regional business'}
         })
         return context
 
@@ -138,6 +137,7 @@ class OregonSports(ListView):
         if self.template_name == 'ap_wfm/apstory_category_index.html':
             context.update({
                 'pretty_name': 'oregon sports',
+                'page': {'title': 'the wire', 'description_short': 'oregon sports'}
             })
         return context
 
@@ -167,6 +167,7 @@ class Lotteries(ListView):
         if self.template_name == 'ap_wfm/apstory_category_index.html':
             context.update({
                 'pretty_name': 'lotteries',
+                'page': {'title': 'the wire', 'description_short': 'Oregon, California lottery results'}
             })
         return context
 
