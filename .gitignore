@@ -32,3 +32,4 @@ pip-log.txt
 .mr.developer.cfg
 
 fixtures/*
+management/commands/ap_wfm_settings.py
