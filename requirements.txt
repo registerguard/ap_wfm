@@ -1,1 +1,3 @@
+django
 lxml==3.3.5
+python-dateutil==1.5
