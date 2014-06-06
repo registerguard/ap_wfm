@@ -36,3 +36,4 @@ management/commands/ap_wfm_settings.py
 WFA/
 WebFeedsAgent.jar
 WebFeedsAgent/
+management/commands/xml_into_Django.log
