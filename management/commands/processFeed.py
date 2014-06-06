@@ -72,21 +72,21 @@ class Command(BaseCommand):
         fileLogger = logging.handlers.RotatingFileHandler(filename='xml_into_Django.log', maxBytes=256*1024, backupCount=5) # 256 x 1024 = 256K
         fileLogger.setFormatter(formatter)
         logger.addHandler(fileLogger)
-    
+        
         logger.debug('>>>Script called.')
         start_time = time.time()
-    
+        
         try:
             logger.debug('%s passed to script.' % args[0])
         except IndexError, err:
             logger.error('You need to supply a path to a xml file.')
             return
-    
-        if args[0].count('/feeds/'):
         
+        if args[0].count('/feeds/'):
+            
             # ['', 'rgcalendar', 'oper', 'WFA', 'RemoteHeadlines', 'feeds', 'Oregon-JH', 'feed_2013-02-07T04-13-11.408Z.xml']
             ap_content_feed = args[0].split(os.path.sep)[-2]
-        
+            
             try:
                 doc = objectify.parse(args[0])
                 tree = doc.getroot()
@@ -218,7 +218,7 @@ The solution is to open up the write permissions on
             
                 try:
                     byline_title = e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].ByLine.attrib['Title']
-                except AttributeError:
+                except (AttributeError, KeyError), err:
                     byline_title = ''
                 print 'BYLINE_TITLE:', byline_title
             
