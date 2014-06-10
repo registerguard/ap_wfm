@@ -1,5 +1,4 @@
-#!/Users/jheasly/.virtualenvs/test_root/bin/python
-
+#!/usr/bin/env python
 def main():
     import os, sys
     from os import environ
