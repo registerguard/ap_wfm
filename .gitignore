@@ -39,3 +39,4 @@ WebFeedsAgent/
 management/commands/xml_into_Django.log
 config/
 logs/
+xml_into_Django.log*
