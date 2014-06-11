@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.http import HttpResponse
 from django.utils import simplejson
-from ballot.templatetags.humanize_list import humanize_list
+from ap_wfm.templatetags.humanize_list import humanize_list
 from sorl.thumbnail import ImageField
 
 def json_response(func):
