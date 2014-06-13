@@ -2,5 +2,3 @@ django
 lxml==3.3.5
 python-dateutil==1.5
 sorl-thumbnail==11.12
-# ballot/templatetags/humanize_list.py
-# placeholder ap_wfm_settings.py file
