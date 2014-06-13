@@ -33,6 +33,7 @@ pip-log.txt
 
 fixtures/*
 management/commands/ap_wfm_settings.py
+call_process_feed.py
 WFA/
 WebFeedsAgent.jar
 WebFeedsAgent/
