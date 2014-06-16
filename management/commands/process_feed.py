@@ -372,12 +372,16 @@ The solution is to open up the write permissions on
                             except KeyError, err:
                                 logger.debug('      No alternate-text in a photo associated with %s' % e.title.text)
                                 alt_text = 'AP image'
-                            media_source = media_item['media-producer'][0].text.strip()
+                            try:
+                                media_source = media_item['media-producer'][0].text.strip()
             #                     media_source = media_item['media-producer'][1].text.strip()
+                            except AttributeError:
+                                media_source = ''
                         
                             # munge through the many media-metadata elements that 
                             # accompany each image to find the first reference 
                             # to OriginalFileName ... 
+                            orig_file_name = ''
                             media_metas = media_item.iterfind('media-metadata')
                             for media_meta in media_metas:
                                 if media_meta.attrib['name'] == 'OriginalFileName':
