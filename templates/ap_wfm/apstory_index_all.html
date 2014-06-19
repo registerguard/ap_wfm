@@ -20,7 +20,7 @@
 			
 						<hgroup>
 				
-							<h3 class="label">{% if apstory.location %}{{ apstory.location }} | {% endif %}{% if apstory.contributor %}{{ apstory.contributor }}{% endif %}</h3>
+							<h3 class="label">{{ apstory.location }}{% if apstory.location and apstory.contributor %} | {% endif %}{% if apstory.contributor %}{{ apstory.contributor }}{% endif %}</h3>
 				
 							<h1 class="h5">
 								<a href="http://{{ current_site }}{% url ap_story_detail apstory.category.all.0 apstory.slug %}">{% firstof apstory.headline apstory.title %}</a>
