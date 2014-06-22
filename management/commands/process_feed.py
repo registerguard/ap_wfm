@@ -91,6 +91,7 @@ class Command(BaseCommand):
                 doc = objectify.parse(args[0])
                 tree = doc.getroot()
             except IOError, err:
+                logger.error(err)
                 message = u'''Problem inserting AP web feeds story(ies).
 
 The following error happened:
