@@ -1,3 +1,8 @@
+import datetime
+import logging
+import settings
+import ap_wfm_settings
+from ap_wfm.models import APStory
 from django.core.management.base import BaseCommand, CommandError
 
 
@@ -10,6 +15,7 @@ from django.core.management.base import BaseCommand, CommandError
 Required settings.py variables:
 AWS_ACCESS_KEY_ID = ''
 AWS_SECRET_ACCESS_KEY = ''
+AWS_STORAGE_BUCKET_NAME = ''
 
 Optional ap_wfm_settings.py variable:
 DAYS_BACK = [integer]
@@ -24,18 +30,33 @@ except ImportError, err:
     raise
 
 class Command(BaseCommand):
-    DAYS_BACK = None
+    args = None
+    help = 'Deletes APStories and associated images after DAYS_BACK number of days.'
+    DAYS_BACK = 60
     
     def handle(self, *args, **kwargs):
         # Get XX days back of APStories
         
         # Delete images attached to above APStories stories
         # ... and make sure it logs! ... 
+        try:
+            if ap_wfm_settings.DAYS_BACK:
+                self.DAYS_BACK = ap_wfm_settings.DAYS_BACK
+        except AttributeError, err:
+            raise
         
-        self.DAYS_BACK = ap_wfm_settings.DAYS_BACK
+        try:
+            self.AWS_ACCESS_KEY_ID, self.AWS_SECRET_ACCESS_KEY, self.AWS_STORAGE_BUCKET_NAME = settings.AWS_ACCESS_KEY_ID, settings.AWS_SECRET_ACCESS_KEY, settings.AWS_STORAGE_BUCKET_NAME
+        except AttributeError, err:
+            raise
         
-        conn = S3Connection(AWS_ACCESS_KEY, AWS_SECERET_KEY)
-        b = Bucket(conn, S3_BUCKET_NAME)
+        expire_date = datetime.datetime.now() - datetime.timedelta(days=self.DAYS_BACK)
+        print self.DAYS_BACK
+        print expire_date
+        print APStory.objects.filter(created__lte=expire_date).count()
+        
+        conn = S3Connection(self.AWS_ACCESS_KEY_ID, self.AWS_SECRET_ACCESS_KEY)
+        b = Bucket(conn, self.AWS_STORAGE_BUCKET_NAME)
         k = Key(b)
-        k.key = 'images/my-images/'+filename
-        b.delete_key(k)
+#         k.key = 'images/my-images/' + filename
+#         b.delete_key(k)
