@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# How many days of AP stories do you want to keep active?
+# If None, defaults to 60 (set with integer, not string).
+DAYS_BACK = None
+
 # Error email “from”/sender:
 FROM_EMAIL = 'baz@foo.com'
 
