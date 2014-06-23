@@ -1,5 +1,6 @@
 import datetime
 import logging
+import os
 import settings
 import ap_wfm_settings
 from ap_wfm.models import APStory
@@ -35,10 +36,17 @@ class Command(BaseCommand):
     DAYS_BACK = 60
     
     def handle(self, *args, **kwargs):
-        # Get XX days back of APStories
+        logger = logging.getLogger(__name__)
+        logger.setLevel(logging.DEBUG)
+        formatter = logging.Formatter('%(asctime)-6s: %(name)s - %(levelname)s - %(message)s')
+        handler = logging.StreamHandler()
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
+        # get file path bits here.
+        fileLogger = logging.handlers.RotatingFileHandler(filename=('delete_old_stories_images.log'), maxBytes=512*1024, backupCount=4) # 512 * 1024 = 512K
+        fileLogger.setFormatter(formatter)
+        logger.addHandler(fileLogger)
         
-        # Delete images attached to above APStories stories
-        # ... and make sure it logs! ... 
         try:
             if ap_wfm_settings.DAYS_BACK:
                 self.DAYS_BACK = ap_wfm_settings.DAYS_BACK
@@ -51,6 +59,7 @@ class Command(BaseCommand):
             raise
         
         expire_date = datetime.datetime.now() - datetime.timedelta(days=self.DAYS_BACK)
+        logger.debug('No. of DAYS_BACK: %s' % self.DAYS_BACK)
         print self.DAYS_BACK
         print expire_date
         print APStory.objects.filter(created__lte=expire_date).count()
