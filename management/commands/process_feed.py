@@ -63,13 +63,15 @@ class Command(BaseCommand):
     help = 'Parses, imports AP WebFeeds XML into Django databoase.'
     
     def handle(self, *args, **options):
+        log_file_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)))
+        
         logger = logging.getLogger(__name__)
         logger.setLevel(logging.DEBUG)
         formatter = logging.Formatter('%(asctime)-6s: %(name)s - %(levelname)s - %(message)s')
         handler = logging.StreamHandler()
         handler.setFormatter(formatter)
         logger.addHandler(handler)
-        fileLogger = logging.handlers.RotatingFileHandler(filename='xml_into_Django.log', maxBytes=256*1024, backupCount=5) # 256 x 1024 = 256K
+        fileLogger = logging.handlers.RotatingFileHandler(filename=(log_file_dir + '/xml_into_Django.log'), maxBytes=256*1024, backupCount=5) # 256 x 1024 = 256K
         fileLogger.setFormatter(formatter)
         logger.addHandler(fileLogger)
         
