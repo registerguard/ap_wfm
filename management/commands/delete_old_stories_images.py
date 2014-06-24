@@ -1,6 +1,7 @@
 import datetime
 import logging
 import os
+import sys
 import settings
 import ap_wfm_settings
 from ap_wfm.models import APStory
@@ -36,6 +37,8 @@ class Command(BaseCommand):
     DAYS_BACK = 60
     
     def handle(self, *args, **kwargs):
+        log_file_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)))
+        
         logger = logging.getLogger(__name__)
         logger.setLevel(logging.DEBUG)
         formatter = logging.Formatter('%(asctime)-6s: %(name)s - %(levelname)s - %(message)s')
@@ -43,7 +46,7 @@ class Command(BaseCommand):
         handler.setFormatter(formatter)
         logger.addHandler(handler)
         # get file path bits here.
-        fileLogger = logging.handlers.RotatingFileHandler(filename=('delete_old_stories_images.log'), maxBytes=512*1024, backupCount=4) # 512 * 1024 = 512K
+        fileLogger = logging.handlers.RotatingFileHandler(filename=(log_file_dir + '/delete_old_stories_images.log'), maxBytes=512*1024, backupCount=4) # 512 * 1024 = 512K
         fileLogger.setFormatter(formatter)
         logger.addHandler(fileLogger)
         
