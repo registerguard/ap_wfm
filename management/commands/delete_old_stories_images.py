@@ -51,8 +51,7 @@ class Command(BaseCommand):
         logger.addHandler(fileLogger)
         
         try:
-            if ap_wfm_settings.DAYS_BACK:
-                self.DAYS_BACK = ap_wfm_settings.DAYS_BACK
+            self.DAYS_BACK = getattr(ap_wfm_settings, "DAYS_BACK", 90)
         except AttributeError, err:
             raise
         
