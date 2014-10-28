@@ -8,7 +8,7 @@ AP WebFeeds Manager parser
 Install requirements
 --------------------
 
-1. An [AP Exchange](http://www.apexchange.com/) news feed
+1. An [AP Exchange](http://www.apexchange.com/) Saved Search news feed. At least one, but several can work at the same time. We've got ~16 going at a time.
 1. An [AP WebFeeds Manager](http://wfm.ap.org/) installation pointed at the AP Exchange news feed
 1. A working [Django](https://www.djangoproject.com/) installation
 1. A cron job that inserts the AP stories resulting from the AP Exchange -> WebFeeds Manager XML into a Django database.
