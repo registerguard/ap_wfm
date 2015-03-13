@@ -159,10 +159,16 @@ The solution is to open up the write permissions on
             
                 # Get a count of the <block id="Main"> in the current story
                 block_count = len( e.content['{}nitf'].body['body.content'].findall('block') )
-            
-                # If multiple <block id="Main">s on Oregon wire, then it's a Lottery round-up
-                if block_count > 1 and ap_content_feed in ('Oregon-JH') and \
-                    e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].SubjectClassification.attrib['Value'] == 'j':
+                
+#                 # If multiple <block id="Main">s on Oregon wire, then it's a Lottery round-up
+#                 if block_count > 1 and ap_content_feed in ('Oregon-JH') and \
+#                     e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].SubjectClassification.attrib['Value'] == 'j':
+                    
+                # Re the above: "<block id="Main">s on Oregon wire, then it's a Lottery round-up"
+                # Not sure why I wouldn't want all <blocks> that are within a <block id ="Main"> 
+                # to get concatenated? Why was I checking for Oregon/j-wire? Whelp, I'm going to 
+                # take those two checks out and see what happens ... 
+                if block_count > 1:
                     body_text = ''
                     main_blocks = e.content['{}nitf'].body['body.content'].iterfind('block')
                     for main_block in main_blocks:
