@@ -50,8 +50,8 @@ If e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].Source.text == 'McCl
 
 def skip_entry_test(title_text, list_of_frags_to_skip, the_log):
     for title_frag in list_of_frags_to_skip:
-        if title_frag and title_frag in title_text:
-            the_log.debug('   *** NEW SKIPPER: Skipped %s entry. ***' % title_text) 
+        if title_frag in title_text:
+            the_log.debug('   *** NEW SKIPPER: Skipped %s entry. Skipped because disallowed fragment \'%s\' was in \'%s\'. ***' % (title_text, title_frag, title_text))
             return True
         else:
             continue
@@ -63,6 +63,7 @@ class Command(BaseCommand):
     help = 'Parses, imports AP WebFeeds XML into Django databoase.'
     
     def handle(self, *args, **options):
+        category = ''
         log_file_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)))
         
         logger = logging.getLogger(__name__)
