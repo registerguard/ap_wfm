@@ -19,3 +19,11 @@ Then install the project requirements:
 ```
 pip install -r requirements.txt
 ```
+
+To restart
+----------
+
+If running a manual restart from `oper` account home directory on command line:
+```bash
+$ nohup java -jar projects_root/ap_wfm/WebFeedsAgent.jar commandLine > /dev/null 2>&1 &
+```
