@@ -9,7 +9,7 @@ class ImageInline(AdminImageMixin, admin.TabularInline):
 class APStoryAdmin(admin.ModelAdmin):
     save_on_top = True
     search_fields = ['title', 'headline', 'slugline', 'keywords', ]
-    list_display = ('id', 'created', 'published', 'updated', 'keywords', 'title', 'headline', 'slugline', 'slug', 'categories', 'image_count', 'contributor', 'consumer_ready', 'subject_code', 'location',)
+    list_display = ('id', 'created', 'published', 'updated', 'consumer_ready', 'headline', 'keywords', 'title', 'slugline', 'slug', 'categories', 'image_count', 'contributor', 'subject_code', 'location',)
     list_filter = ('category', 'subject_code',)
     ordering = ('-created',)
     prepopulated_fields = {'slug': ('headline',)}
