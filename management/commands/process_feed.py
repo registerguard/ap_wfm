@@ -159,7 +159,7 @@ The solution is to open up the write permissions on
                 except AttributeError:
                     content_element = ''
                 
-                # Patching in FastStory's ... 
+                # Patching in AP FastStory's ... 
                 
                 # if content_element == 'FullStory':
                 if content_element == 'FullStory' or content_element == 'FastStory':
@@ -180,12 +180,28 @@ The solution is to open up the write permissions on
                     else:
                         ap_staff_written = False
                     
+                    if the_source == 'New York Times Syndicate':
+                        nyt = True
+                    else:
+                        nyt = False
+                    
                     print 'The SOURCE:', the_source
                 except:
                     pass
                 
+                # If it's a NYT TIMES EXPRESS article, then skip it.
+                # e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].SubjectClassification.attrib['Value']
+                try:
+                    nyt_te = getattr(e['{http://ap.org/schemas/03/2005/apnm}NewsManagement'].PublishingSpecialInstructions, "text", '')
+                except AttributeError:
+                    nyt_te = ''
+                if nyt_te.count('article is part of TIMES EXPRESS'):
+                    logger.debug( '   Note: %s is a New York Times Express article and thus will not be saved.' % e.title.text )
+                    continue
+                
+                # If it's an AP staff written story, but isn't FullStory (or FastStory), then skip it.
                 if ap_staff_written and not full_story:
-                    print 'This AP story, %s, is not a \'FullStory\', so we\'re outta here!' % e.title.text
+                    logger.debug( '   Note: This AP story, %s, is not a \'FullStory\', so will not be saved.' % e.title.text )
                     continue
                 
                 try:
