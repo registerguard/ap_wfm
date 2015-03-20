@@ -15,6 +15,8 @@ cases?
 * Check both slugify(title) and 'headline'; if either match, you've got a 
 replacement
 
+* Deal with FastStory's from the AP (sometimes they can be good ... )
+
 '''
 
 import datetime
@@ -64,6 +66,7 @@ class Command(BaseCommand):
     
     def handle(self, *args, **options):
         category = ''
+        
         log_file_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)))
         
         logger = logging.getLogger(__name__)
@@ -149,15 +152,50 @@ The solution is to open up the write permissions on
                             continue
                     except AttributeError, err:
                         logger.debug('>>> No "contributor" element: %s' % err)
-            
+                
+                # See if 'FullStory' is in <apcm:ContentElement>
+                try:
+                    content_element = getattr(e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].ContentElement, "text", '')
+                except AttributeError:
+                    content_element = ''
+                
+                # Patching in FastStory's ... 
+                
+                # if content_element == 'FullStory':
+                if content_element == 'FullStory' or content_element == 'FastStory':
+                    full_story = True
+                    fast_story = False
+                elif content_element == 'FastStory':
+                    fast_story = True
+                    full_story = False
+                else:
+                    full_story = False
+                    fast_story = False
+                
+                # See if story is AP staff written
+                try:
+                    the_source = getattr(e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].Source, "text", '')
+                    if the_source == 'AP':
+                        ap_staff_written = True
+                    else:
+                        ap_staff_written = False
+                    
+                    print 'The SOURCE:', the_source
+                except:
+                    pass
+                
+                if ap_staff_written and not full_story:
+                    print 'This AP story, %s, is not a \'FullStory\', so we\'re outta here!' % e.title.text
+                    continue
+                
                 try:
                     headline = getattr(e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].ExtendedHeadLine, "text", '')
                 except AttributeError:
                     headline = ''
-            
+                
                 if not headline:
                     headline = getattr(e.content['{}nitf'].body['body.head'].hedline.hl1, "text", '')
-            
+                
                 # Get a count of the <block id="Main"> in the current story
                 block_count = len( e.content['{}nitf'].body['body.content'].findall('block') )
                 
@@ -242,11 +280,6 @@ The solution is to open up the write permissions on
                     consumer_ready = False
                 else:
                     consumer_ready = True
-            
-                try:
-                    print 'The SOURCE:', e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].Source.text
-                except:
-                    pass
             
                 try:
                     keywords = e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].Keywords.text
