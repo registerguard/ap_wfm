@@ -123,7 +123,12 @@ The solution is to open up the write permissions on
                 section_lookup_key = t['{http://www.w3.org/1999/xhtml}div'].span.text
                 category = WIRE_CATEGORY_DICT[section_lookup_key]
                 logger.debug('>>>Feeding \'%s\' section.' % category)
-        
+            
+            # ugly, ugly hack to prevent race condition
+            start_delay = WIRE_PROCESSING[ap_content_feed]['delay']
+            time.sleep(start_delay)
+            print 'start_delay:', start_delay
+            
             skip_title_fragments = WIRE_PROCESSING[ap_content_feed]['skip_title']
             if skip_title_fragments:
                 logger.debug('>>> Skip Title fragments: %s' % str(skip_title_fragments))

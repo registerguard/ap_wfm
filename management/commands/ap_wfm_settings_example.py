@@ -40,73 +40,90 @@ WIRE_CATEGORY_DICT = {}
 
 """
 WIRE_PROCESSING = {
-    'All-TopHeadlines-JH': {
+    'All-TopHeadlines': {
         'skip_title': ('Top-General-Headlines',), 
         'replace': ('',),
+        'delay': 0,
     },
-    'Arts-Entertainment-JH': {
+    'Arts-Entertainment': {
         'skip_title': ('-NYT', '-MCT-', 'Top-Entertainment-', 'Top-General-', 'BC-', 'World Briefly',), 
         'replace': ('',),
+        'delay': 0.5,
     },
-    'Business-TopHeadlines-JH': {
+    'Business-TopHeadlines': {
         'skip_title': ('Top-Business-Headlines',), 
         'replace': ('',),
+        'delay': 1.5,
     },
-    'Entertainment-TopHeadlines-JH': {
+    'Entertainment-TopHeadlines': {
         'skip_title': ('Top-Entertainment-Headlines',), 
         'replace': ('',),
+        'delay': 2,
     },
-    'HealthChannel-JH': {
+    'HealthChannel': {
         'skip_title': ('TN--Tennessee Today',),
         'replace': ('',),
+        'delay': 2.5,
     },
-    'International-TopHeadlines-JH': {
+    'International-TopHeadlines': {
         'skip_title': ('Top-International-Headlines',), 
         'replace': ('',),
+        'delay': 3,
     },
-    'Oddities-JH': {
+    'Oddities': {
         'skip_title': ('',),
         'replace': ('',),
+        'delay': 3.5,
     },
-    'Oregon-JH': {
+    'Oregon': {
         'skip_title': ('USDA-', 'The Register-Guard',), 
         'replace': ('',),
+        'delay': 4,
     },
-    'Politics-JH': {
+    'Politics': {
         'skip_title': ('-Cnty', '-Sum', '-elected', '-nominated', '-Uncontested', '-Contested'),
         'replace': ('',),
+        'delay': 4.5,
     },
-    'Region-JH': {
+    'Region': {
         'skip_title': ('',),
         'replace': ('',),
+        'delay': 5,
     },
-    'ScienceChannels-JH': {
+    'ScienceChannels': {
         'skip_title': ('Wind Chill Advisory', ),
         'replace': ('',),
+        'delay': 5.5,
     },
-    'Sports-TopHeadlines-JH': {
+    'Sports-TopHeadlines': {
         'skip_title': ('Top-Sports-Headlines',), 
         'replace': ('',),
+        'delay': 6,
     },
-    'Technology-JH': {
+    'Technology': {
         'skip_title': ('-NYT', '-MCT-', 'COX', 'HNS', 'Stock News', '-CPT', u':MCT — ', u':WA — ',), 
         'replace': ('',),
+        'delay': 6.5,
     },
-    'US-TopHeadlines-JH': {
+    'US-TopHeadlines': {
         'skip_title': ('Top-U.S.-News-Headlines',), 
         'replace': ('',),
+        'delay': 7,
     },
-    'Washington-DC-JH': {
+    'Washington-DC': {
         'skip_title': ('-NYT', '-HNS', u':TBW — ', u':WA — ',), 
         'replace': ('',),
+        'delay': 7.5,
     },
-    'Washington-State-JH': {
+    'Washington-State': {
         'skip_title': ('HKO-WHL', 'LOT--', 'USDA-Portland', 'Box, BKC',), 
         'replace': ('',),
+        'delay': 8,
     },
-    'Weather-JH': {
+    'Weather': {
         'skip_title': ('',),
         'replace': ('',),
+        'delay': 8.5,
     },
 }
 """
