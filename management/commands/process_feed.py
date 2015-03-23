@@ -65,8 +65,6 @@ class Command(BaseCommand):
     help = 'Parses, imports AP WebFeeds XML into Django databoase.'
     
     def handle(self, *args, **options):
-        category = ''
-        
         log_file_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)))
         
         logger = logging.getLogger(__name__)
@@ -89,6 +87,9 @@ class Command(BaseCommand):
             return
         
         if args[0].count('/feeds/'):
+            
+            # clear out any previous category
+            category = ''
             
             # ['', 'rgcalendar', 'oper', 'WFA', 'RemoteHeadlines', 'feeds', 'Oregon-JH', 'feed_2013-02-07T04-13-11.408Z.xml']
             ap_content_feed = args[0].split(os.path.sep)[-2]
