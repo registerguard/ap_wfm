@@ -52,7 +52,7 @@ If e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].Source.text == 'McCl
 
 def skip_entry_test(title_text, list_of_frags_to_skip, the_log):
     for title_frag in list_of_frags_to_skip:
-        if title_frag in title_text:
+        if title_frag and title_frag in title_text:
             the_log.debug('   *** NEW SKIPPER: Skipped %s entry. Skipped because disallowed fragment \'%s\' was in \'%s\'. ***' % (title_text, title_frag, title_text))
             return True
         else:
@@ -77,7 +77,7 @@ class Command(BaseCommand):
         fileLogger.setFormatter(formatter)
         logger.addHandler(fileLogger)
         
-        logger.debug('>>>Script called.')
+        logger.debug('>>> Script called.')
         start_time = time.time()
         
         try:
@@ -93,6 +93,8 @@ class Command(BaseCommand):
             
             # ['', 'rgcalendar', 'oper', 'WFA', 'RemoteHeadlines', 'feeds', 'Oregon-JH', 'feed_2013-02-07T04-13-11.408Z.xml']
             ap_content_feed = args[0].split(os.path.sep)[-2]
+            directory_xml_file = tuple(args[0].split(os.path.sep)[-2:])
+            logger.debug( '>>> STARTING /%s/%s' % directory_xml_file )
             
             try:
                 doc = objectify.parse(args[0])
@@ -123,7 +125,7 @@ The solution is to open up the write permissions on
             for t in tree.title:
                 section_lookup_key = t['{http://www.w3.org/1999/xhtml}div'].span.text
                 category = WIRE_CATEGORY_DICT[section_lookup_key]
-                logger.debug('>>>Feeding \'%s\' section.' % category)
+                logger.debug('>>> Feeding \'%s\' section.' % category)
             
             # ugly, ugly hack to prevent race condition
             start_delay = WIRE_PROCESSING[ap_content_feed]['delay']
@@ -500,4 +502,5 @@ The solution is to open up the write permissions on
             logger.debug('Item %s ignored.' % (args[0]))
     
         elapsed_time = time.time() - start_time
-        logger.debug('>>>Script finished. Took %s to run ... ' % ( str(datetime.timedelta(seconds=elapsed_time))) )
+        logger.debug( '>>> FINISHED /%s/%s.' % directory_xml_file )
+        logger.debug( '>>> Took %s to run ... ' % ( str(datetime.timedelta(seconds=elapsed_time))) )
