@@ -27,3 +27,4 @@ If running a manual restart from `oper` account home directory on command line:
 ```bash
 $ nohup java -jar [your_django_project]/ap_wfm/WebFeedsAgent.jar commandLine > /dev/null 2>&1 &
 ```
+(Remember, this is only to restart. First time runinng, you must supply `userName`, `password` and `agentName`.)
