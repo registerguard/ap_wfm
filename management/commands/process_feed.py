@@ -64,8 +64,12 @@ class Command(BaseCommand):
     args = 'The full path to the AP XML file.'
     help = 'Parses, imports AP WebFeeds XML into Django databoase.'
     
+    # clear out any previous category
+    category = None
+    
     def handle(self, *args, **options):
         log_file_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)))
+        ap_content_feed = args[0].split(os.path.sep)[-2]
         
         logger = logging.getLogger(__name__)
         logger.setLevel(logging.DEBUG)
@@ -73,7 +77,7 @@ class Command(BaseCommand):
         handler = logging.StreamHandler()
         handler.setFormatter(formatter)
         logger.addHandler(handler)
-        fileLogger = logging.handlers.RotatingFileHandler(filename=(log_file_dir + '/xml_into_Django.log'), maxBytes=256*1024, backupCount=5) # 256 x 1024 = 256K
+        fileLogger = logging.handlers.RotatingFileHandler(filename=( log_file_dir + '/%s_xml_into_Django.log' % ap_content_feed ), maxBytes=256*1024, backupCount=5) # 256 x 1024 = 256K
         fileLogger.setFormatter(formatter)
         logger.addHandler(fileLogger)
         
@@ -87,12 +91,7 @@ class Command(BaseCommand):
             return
         
         if args[0].count('/feeds/'):
-            
-            # clear out any previous category
-            category = ''
-            
             # ['', 'rgcalendar', 'oper', 'WFA', 'RemoteHeadlines', 'feeds', 'Oregon-JH', 'feed_2013-02-07T04-13-11.408Z.xml']
-            ap_content_feed = args[0].split(os.path.sep)[-2]
             directory_xml_file = tuple(args[0].split(os.path.sep)[-2:])
             logger.debug( '>>> STARTING /%s/%s' % directory_xml_file )
             
@@ -378,23 +377,47 @@ The solution is to open up the write permissions on
     #                 old_version_qs = APStory.objects.filter( slug=slugify(e.title.text), category=ap_cat ) | APStory.objects.filter( management_id=management_id, category=ap_cat ).order_by('-id')
     #                 old_version_qs = APStory.objects.filter( slug=slugify(e.title.text), category=ap_cat ) | APStory.objects.filter( management_id=management_id, category=ap_cat ).order_by('-id')
                     old_version_qs = APStory.objects.filter( slug=slugify(e.title.text) ) | APStory.objects.filter( management_id=management_id ).order_by('-id')
-                    logger.debug('XXX Keywords used for deletion: \'%s\' XXX' % e.title.text)
+                    logger.debug( 'XXX Older version look-up based on slug: \'%s\', management_id: %s XXX' % (slugify(e.title.text), management_id) )
                     if old_version_qs:
-                        logger.debug('XXX QuerySet of oldness about to be deleted: %s XXX' % old_version_qs)
-                        # iterate over stories in QuerySet
+                        logger.debug('XXX Found older version: %s XXX' % old_version_qs)
+                        # iterate over each APStory in QuerySet to find which 
+                        # Categories older version belonged to.
                         for old_story in old_version_qs:
-                            # iterate over categories in each story
-                            for old_cat in old_story.category.all():
-                                old_cats.append(old_cat)
-                        print '    SALVAGED CATEGORY/IES:', old_cats
-                        old_version_qs.delete()
-                    # Save the newest one ... 
-                    APStory_instance.save()
-                    if old_cats:
-                        for salvaged_cat in old_cats:
-                            print '        ADDING SALVAGED CATEGORY: %s to %s' % (salvaged_cat, APStory_instance.headline)
-                            salvaged_cat_id, cat_created = Category.objects.get_or_create(name=salvaged_cat.name)
-                            APStory_instance.category.add(salvaged_cat_id)
+                            old_story.updated = dateParser(e.updated.text).strftime('%Y-%m-%d %H:%M:%S.%f')
+                            old_story.published = dateParser(e.published.text).strftime('%Y-%m-%d %H:%M:%S.%f')
+                            old_story.management_id = management_id
+                            old_story.consumer_ready = consumer_ready
+                            old_story.media_type = e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].MediaType.text,
+                            old_story.priority_numeric = e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].Priority.attrib['Numeric']
+                            old_story.priority_legacy = e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].Priority.attrib['Legacy']
+                            old_story.subject_code = ap_subject_code
+                            old_story.location = location
+                            old_story.contributor = contributor
+                            old_story.contributor_uri = contributor_uri
+                            old_story.byline = byline
+                            old_story.byline_title = byline_title
+                            old_story.slugline = e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].SlugLine.text
+                            old_story.title = e.title.text
+                            old_story.keywords = keywords
+                            old_story.headline = headline
+                            old_story.slug = slugify(e.title.text)
+                            old_story.body = body_text
+                            old_story.save()
+                            APStory_instance = old_story
+                            logger.debug('XXX UPDATED %s XXX' % e.title.text)
+                            # # iterate over categories in each story
+                            # for old_cat in old_story.category.all():
+                            #     old_cats.append(old_cat)
+                        # print '    SALVAGED CATEGORY/IES:', old_cats
+                        # old_version_qs.delete()
+                    else:
+                        # Save the newest one ... 
+                        APStory_instance.save()
+                    # if old_cats:
+                    #     for salvaged_cat in old_cats:
+                    #         print '        ADDING SALVAGED CATEGORY: %s to %s' % (salvaged_cat, APStory_instance.headline)
+                    #         salvaged_cat_id, cat_created = Category.objects.get_or_create(name=salvaged_cat.name)
+                    #         APStory_instance.category.add(salvaged_cat_id)
                     if ap_cat not in APStory_instance.category.all():
                         print '        ADDING NEW CATEGORY'
                         APStory_instance.category.add(ap_cat)
@@ -503,4 +526,4 @@ The solution is to open up the write permissions on
     
         elapsed_time = time.time() - start_time
         logger.debug( '>>> FINISHED /%s/%s.' % directory_xml_file )
-        logger.debug( '>>> Took %s to run ... ' % ( str(datetime.timedelta(seconds=elapsed_time))) )
+        logger.debug( '>>> Took %s to run ... \n' % ( str(datetime.timedelta(seconds=elapsed_time))) )
