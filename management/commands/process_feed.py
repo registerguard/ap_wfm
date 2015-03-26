@@ -137,7 +137,11 @@ The solution is to open up the write permissions on
         
             for e in tree.entry:
                 logger.debug('    %s' % e.title.text)
-            
+                
+                if 'New York Times' in e.rights.text:
+                    logger.debug('    Skipping %s as it is NYTimes content.' % e.title.text)
+                    continue
+                
                 if skip_entry_test(e.title.text, skip_title_fragments, logger):
                     continue
             
