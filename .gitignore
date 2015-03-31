@@ -38,6 +38,7 @@ WFA/
 WebFeedsAgent.jar
 WebFeedsAgent/
 management/commands/*.log
+management/commands/*.log.*
 config/
 logs/
 xml_into_Django.log*
