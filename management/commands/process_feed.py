@@ -380,12 +380,12 @@ The solution is to open up the write permissions on
                 
     #                 old_version_qs = APStory.objects.filter( slug=slugify(e.title.text), category=ap_cat ) | APStory.objects.filter( management_id=management_id, category=ap_cat ).order_by('-id')
     #                 old_version_qs = APStory.objects.filter( slug=slugify(e.title.text), category=ap_cat ) | APStory.objects.filter( management_id=management_id, category=ap_cat ).order_by('-id')
-                    old_version_qs = APStory.objects.filter( slug=slugify(e.title.text) ) | APStory.objects.filter( management_id=management_id ).order_by('-id')
+                    old_version_qs = ( APStory.objects.filter( slug=slugify(e.title.text) ) | APStory.objects.filter( management_id=management_id ) ).order_by('-id')
                     logger.debug( 'XXX Older version look-up based on slug: \'%s\', management_id: %s XXX' % (slugify(e.title.text), management_id) )
                     if old_version_qs:
                         if len(old_version_qs) > 1:
-                            logger.debug('MULTIPLE STORIES FOUND: %s' % old_version_qs)
-                        logger.debug('XXX Found older version: %s XXX' % old_version_qs)
+                            logger.debug( 'MULTIPLE STORIES FOUND: %s' % old_version_qs )
+                        logger.debug( 'XXX Found older version: %s XXX' % old_version_qs )
                         # iterate over each APStory in QuerySet to find which 
                         # Categories older version belonged to.
                         for old_story in old_version_qs:
@@ -411,19 +411,24 @@ The solution is to open up the write permissions on
                             old_story.save()
                             APStory_instance = old_story
                             logger.debug('XXX UPDATED %s XXX' % e.title.text)
-                            # # iterate over categories in each story
-                            # for old_cat in old_story.category.all():
-                            #     old_cats.append(old_cat)
-                        # print '    SALVAGED CATEGORY/IES:', old_cats
-                        # old_version_qs.delete()
+                            # iterate over categories in each story
+                            for old_cat in old_story.category.all():
+                                old_cats.append(old_cat)
+                        logger.debug( '    RETRIEVED CATEGORY/IES: %s' % old_cats )
+                        if old_version_qs[:1]:
+                            old_version_qs_list = old_version_qs[1:]
+                            for old_version in old_version_qs_list:
+                                old_version.delete()
+                                logger.debug( '    DELETED %s!' % old_version )
                     else:
                         # Save the newest one ... 
                         APStory_instance.save()
-                    # if old_cats:
-                    #     for salvaged_cat in old_cats:
-                    #         print '        ADDING SALVAGED CATEGORY: %s to %s' % (salvaged_cat, APStory_instance.headline)
-                    #         salvaged_cat_id, cat_created = Category.objects.get_or_create(name=salvaged_cat.name)
-                    #         APStory_instance.category.add(salvaged_cat_id)
+
+                    if old_cats:
+                        for salvaged_cat in old_cats:
+                            logger.debug( '        ADDING RETRIEVED CATEGORY: %s to %s' % (salvaged_cat, APStory_instance.headline) )
+                            salvaged_cat_id, cat_created = Category.objects.get_or_create(name=salvaged_cat.name)
+                            APStory_instance.category.add(salvaged_cat_id)
                     if ap_cat not in APStory_instance.category.all():
                         print '        ADDING NEW CATEGORY'
                         APStory_instance.category.add(ap_cat)
