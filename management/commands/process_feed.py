@@ -383,6 +383,8 @@ The solution is to open up the write permissions on
                     old_version_qs = APStory.objects.filter( slug=slugify(e.title.text) ) | APStory.objects.filter( management_id=management_id ).order_by('-id')
                     logger.debug( 'XXX Older version look-up based on slug: \'%s\', management_id: %s XXX' % (slugify(e.title.text), management_id) )
                     if old_version_qs:
+                        if len(old_version_qs) > 1:
+                            logger.debug('MULTIPLE STORIES FOUND: %s' % old_version_qs)
                         logger.debug('XXX Found older version: %s XXX' % old_version_qs)
                         # iterate over each APStory in QuerySet to find which 
                         # Categories older version belonged to.
@@ -391,7 +393,7 @@ The solution is to open up the write permissions on
                             old_story.published = dateParser(e.published.text).strftime('%Y-%m-%d %H:%M:%S.%f')
                             old_story.management_id = management_id
                             old_story.consumer_ready = consumer_ready
-                            old_story.media_type = e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].MediaType.text,
+                            old_story.media_type = e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].MediaType.text
                             old_story.priority_numeric = e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].Priority.attrib['Numeric']
                             old_story.priority_legacy = e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].Priority.attrib['Legacy']
                             old_story.subject_code = ap_subject_code
