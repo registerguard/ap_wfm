@@ -389,8 +389,9 @@ The solution is to open up the write permissions on
                         # iterate over each APStory in QuerySet to find which 
                         # Categories older version belonged to.
                         for old_story in old_version_qs:
-                            old_story.updated = dateParser(e.updated.text).strftime('%Y-%m-%d %H:%M:%S.%f')
-                            old_story.published = dateParser(e.published.text).strftime('%Y-%m-%d %H:%M:%S.%f')
+                            old_story.created = datetime.datetime.now()
+                            old_story.updated = dateParser(e.updated.text)
+                            old_story.published = dateParser(e.published.text)
                             old_story.management_id = management_id
                             old_story.consumer_ready = consumer_ready
                             old_story.media_type = e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].MediaType.text
