@@ -497,8 +497,8 @@ The solution is to open up the write permissions on
                             except:
                                 file_name = 'temp_AP_photo_file.jpg'
                         
-                            img_temp = NamedTemporaryFile(delete=True)
                             try:
+                                img_temp = NamedTemporaryFile(delete=True)
                                 img_temp.write(urllib2.urlopen(photo_url).read())
                                 img_temp.flush()
                             
