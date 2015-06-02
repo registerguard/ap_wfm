@@ -28,3 +28,9 @@ If running a manual restart from `oper` account home directory on command line:
 $ nohup java -jar [your_django_project]/ap_wfm/WebFeedsAgent.jar commandLine > /dev/null 2>&1 &
 ```
 (Remember, this is only to restart. First time runinng, you must supply `userName`, `password` and `agentName`.)
+
+To run locally
+--------------
+
+To get the ingestion script to run with a local, development set of settings:  
+`python manage.py process_feed /Users/jheasly/Development/ap_wfm/WFA/feeds/All-TopHeadlines-JH/feed_644355_2015-06-02T16-39-38.445Z.xml --settings=test_root.local_settings`
