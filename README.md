@@ -38,3 +38,5 @@ To get the ingestion script to run with a local, development set of settings:
 Starting tips
 -------------
 ![screenshot 2015-06-05 13 24 33](https://cloud.githubusercontent.com/assets/96007/8014624/249539e8-0b87-11e5-9cd8-9a20316e2da0.png)
+Follow the above, then check the below:
+![screenshot 2015-06-05 13 32 38](https://cloud.githubusercontent.com/assets/96007/8014708/91d29dc0-0b87-11e5-8f0f-5c59e89bfc12.png)
