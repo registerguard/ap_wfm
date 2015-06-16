@@ -2,10 +2,11 @@ from django.conf.urls.defaults import *
 from ap_wfm.views import APStoryListView, APStoryDetailView, \
 APCategoryCountListView, PortlandStocks, OregonSports, \
 OregonNewsNoSportsNoBizNoLott, Lotteries, json_view
-from ap_wfm.feeds import RssLatestEntries, AtomLatestEntries
+from ap_wfm.feeds import RssLatestEntries, AtomLatestEntries, RssLatestRegion
 
 urlpatterns = patterns('',
     (r'^feeds/rss/$', RssLatestEntries()),
+    (r'^feeds/rss/region/$', RssLatestRegion()),
     (r'^feeds/atom/$', AtomLatestEntries()),
     url(r'^$', APStoryListView.as_view(), name='ap_story_index'),
     url(r'^lotteries/(?P<count>\d+)/$', Lotteries.as_view(template_name='ap_wfm/apstory_list.html'), name='lotteries'),
