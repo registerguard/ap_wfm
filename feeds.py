@@ -34,7 +34,7 @@ class RssLatestRegion(Feed):
     link = '/apf/feeds/rss/region/'
     description = 'The very latest region items via The Associated Press'
 
-    def items(self, region):
+    def items(self):
         # 14 is Id of 'region' Category.
         return APStory.objects.filter(consumer_ready=True, category__name='region')[:10]
 
