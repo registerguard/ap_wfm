@@ -497,33 +497,38 @@ The solution is to open up the write permissions on
                             except:
                                 file_name = 'temp_AP_photo_file.jpg'
                         
-                            img_temp = NamedTemporaryFile(delete=True)
-                            img_temp.write(urllib2.urlopen(photo_url).read())
-                            img_temp.flush()
-                        
-                            im = Image(
-                                apstory = APStory_instance, 
-                                caption = caption, 
-                                alt_text = alt_text, 
-                                original_filename = orig_file_name, 
-                                source = media_source, 
-                            )
-                        
                             try:
+                                img_temp = NamedTemporaryFile(delete=True)
+                                img_temp.write(urllib2.urlopen(photo_url).read())
+                                img_temp.flush()
+                            
+                                im = Image(
+                                    apstory = APStory_instance, 
+                                    caption = caption, 
+                                    alt_text = alt_text, 
+                                    original_filename = orig_file_name, 
+                                    source = media_source, 
+                                )
+                                
                                 try:
-                                    img = Image.objects.get(original_filename = orig_file_name)
-                                except MultipleObjectsReturned, err:
-                                    logger.debug('      Tried %s; but there was an error: %s' % (img.original_filename, err))
-                                    pass 
-                                '''
-                                Just because image is in database, doesn't mean it's 
-                                associated with this particular APStory instance ... 
-                                '''
-                                if img:
-                                    APStory_instance.image_set.add(img)
-                            except Image.DoesNotExist:
-                                logger.debug('      Didn\'t find image %s; downloading ... ' % orig_file_name)
-                                im.image.save(file_name, File(img_temp))
+                                    try:
+                                        img = Image.objects.get(original_filename = orig_file_name)
+                                    except MultipleObjectsReturned, err:
+                                        logger.debug('      Tried %s; but there was an error: %s' % (img.original_filename, err))
+                                        pass 
+                                    '''
+                                    Just because image is in database, doesn't mean it's 
+                                    associated with this particular APStory instance ... 
+                                    '''
+                                    if img:
+                                        APStory_instance.image_set.add(img)
+                                except Image.DoesNotExist:
+                                    logger.debug('      Didn\'t find image %s; downloading ... ' % orig_file_name)
+                                    im.image.save(file_name, File(img_temp))
+                            
+                            except urllib2.HTTPError:
+                                logger.debug('IMAGE NOT IMPORTING. You may not have the AP Web Feeds manager running. It needs to be.')
+                                continue
                        
     #                         im.image.save(file_name, File(img_temp))
                         

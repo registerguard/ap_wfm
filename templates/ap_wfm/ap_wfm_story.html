@@ -6,3 +6,11 @@
 	_ox.addVariable('c', 'ap');
 	
 {% endblock head_ad_vars %}
+
+{% block head_extra %}
+
+{{ block.super }}
+
+<meta name="robots" content="noindex, nofollow">
+
+{% endblock head_extra %}
