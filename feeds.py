@@ -36,7 +36,7 @@ class RssLatestRegion(Feed):
 
     def items(self):
         # 14 is Id of 'region' Category.
-        return APStory.objects.filter(consumer_ready=True, category__name='region').exclude(contributor='The Register-Guard').exclude(contributor='The Register-Guard')[:10]
+        return APStory.objects.filter(consumer_ready=True, category__name='region').exclude(contributor='The Register-Guard')[:10]
 
     def item_title(self, item):
         return '%s: %s' % (item.contributor, item.headline)
