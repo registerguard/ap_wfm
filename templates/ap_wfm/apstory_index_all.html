@@ -7,53 +7,53 @@
 {% block content %}
 
 <section>
-	
+
 	<h1 id="archive" class="head head1 give">The very latest from across The Associated Press</h1>
-	
+
 	{% for apstory in object_list %}
 
 		{% if apstory.category.all.0 %}
 			<article>
-	
+
 				<div class="force">
-		
+
 					<header>
-			
+
 						<hgroup>
-				
+
 							<h3 class="label">{{ apstory.location }}{% if apstory.location and apstory.contributor %} | {% endif %}{% if apstory.contributor %}{{ apstory.contributor }}{% endif %}</h3>
-				
+
 							<h1 class="h5">
 								<a href="http://{{ current_site }}{% url ap_story_detail apstory.category.all.0 apstory.slug %}">{% firstof apstory.headline apstory.title %}</a>
 							</h1>
-				
-							<h2 class="sh6">
-					
-								Updated: <a href="http://{{ current_site }}{% url ap_story_detail apstory.category.all.0 apstory.slug %}">{{ apstory.updated }} ({{ apstory.updated|timesince }} ago)</a>
-					
-							</h2>
-				
+
 						</hgroup>
-			
+
 					</header>
-			
+
 					<div class="fix">
-				
+
 						{% if apstory.image_count > 0 %}
 						<img src="{{ MEDIA_URL }}{% thumbnail apstory.image_set.all.0.image 100 100 %}" alt="{{ apstory.image_set.0.alt_text }}">
 						{% endif %}
-				
+
 					</div>
-		
+
+					<h2 class="sh6">
+
+						Updated: <a href="http://{{ current_site }}{% url ap_story_detail apstory.category.all.0 apstory.slug %}">{{ apstory.updated }} ({{ apstory.updated|timesince }} ago)</a>
+
+					</h2>
+
 				</div>
-	
+
 			</article>
-	
+
 			<hr>
 		{% endif %}
-	
+
 	{% endfor %}
-	
+
 </section>
 
 {% endblock content %}
