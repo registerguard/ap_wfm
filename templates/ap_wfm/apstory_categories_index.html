@@ -1,0 +1,454 @@
+{% extends "ap_wfm/ap_wfm.html" %}
+{% load get_item %}
+
+{% block body %}
+
+<h1 class="head give">Latest wire news</h1>
+	{# first row #}
+	<div class="w_row">
+
+		<div class="w_col w_B300 w_C470 w_D300 Bla Cla Dla">
+
+			{% for short_name, story_list in categories0.items %}
+
+			<section>
+
+				<h1 class="reverse">
+					<a href="">{{ pretty_name|get_item:short_name }}</a>
+				</h1>
+
+				<ul class="li1">
+
+					{% for story in story_list %}
+
+					<li><a href="{{ story.get_absolute_url }}">{{ story.headline }}</a></li>
+
+					{% endfor %}
+
+				</ul>
+
+				<footer>
+
+					<p class="jump">
+
+						<a href="">More <span>{{ pretty_name|get_item:short_name }}</span> »</a>
+
+					</p>
+
+				</footer>
+
+			</section>
+
+			{% endfor %}
+
+		</div> <!-- /.w_col -->
+
+		<div class="w_col w_B300 w_C470 w_D300 Blb Clb Dlb Dla">
+
+			{% for short_name, story_list in categories1.items %}
+
+			<section>
+
+				<h1 class="reverse">
+					<a href="">{{ pretty_name|get_item:short_name }}</a>
+				</h1>
+
+				<ul class="li1">
+
+					{% for story in story_list %}
+
+					<li><a href="{{ story.get_absolute_url }}">{{ story.headline }}</a></li>
+
+					{% endfor %}
+
+				</ul>
+
+				<footer>
+
+					<p class="jump">
+
+						<a href="">More <span>{{ pretty_name|get_item:short_name }}</span> »</a>
+
+					</p>
+
+				</footer>
+
+			</section>
+
+			{% endfor %}
+
+		</div> <!-- /.w_col -->
+
+		<div class="w_col w_B300 w_C470 w_D300 w_Bc w_Cc Bla Cla Dlb Dla">
+
+			{% for short_name, story_list in categories2.items %}
+
+			<section>
+
+				<h1 class="reverse">
+					<a href="">{{ pretty_name|get_item:short_name }}</a>
+				</h1>
+
+				<ul class="li1">
+
+					{% for story in story_list %}
+
+					<li><a href="{{ story.get_absolute_url }}">{{ story.headline }}</a></li>
+
+					{% endfor %}
+
+				</ul>
+
+				<footer>
+
+					<p class="jump">
+
+						<a href="">More <span>{{ pretty_name|get_item:short_name }}</span> »</a>
+
+					</p>
+
+				</footer>
+
+			</section>
+
+			{% endfor %}
+
+		</div> <!-- /.w_col -->
+
+		<div class="w_col w_B300 w_C470 w_D300 Blb Clb Dlb">
+
+			{% for short_name, story_list in categories3.items %}
+
+			<section>
+
+				<h1 class="reverse">
+					<a href="">{{ pretty_name|get_item:short_name }}</a>
+				</h1>
+
+				<ul class="li1">
+
+					{% for story in story_list %}
+
+					<li><a href="{{ story.get_absolute_url }}">{{ story.headline }}</a></li>
+
+					{% endfor %}
+
+				</ul>
+
+				<footer>
+
+					<p class="jump">
+
+						<a href="">More <span>{{ pretty_name|get_item:short_name }}</span> »</a>
+
+					</p>
+
+				</footer>
+
+			</section>
+
+			{% endfor %}
+
+		</div> <!-- /.w_col -->
+
+	</div> <!-- /.w_row -->
+	{# second row #}
+	<div class="w_row">
+
+		<div class="w_col w_B300 w_C470 w_D300 Bla Cla Dla">
+
+			{% for short_name, story_list in categories4.items %}
+
+			<section>
+
+				<h1 class="reverse">
+					<a href="">{{ pretty_name|get_item:short_name }}</a>
+				</h1>
+
+				<ul class="li1">
+
+					{% for story in story_list %}
+
+					<li><a href="{{ story.get_absolute_url }}">{{ story.headline }}</a></li>
+
+					{% endfor %}
+
+				</ul>
+
+				<footer>
+
+					<p class="jump">
+
+						<a href="">More <span>{{ pretty_name|get_item:short_name }}</span> »</a>
+
+					</p>
+
+				</footer>
+
+			</section>
+
+			{% endfor %}
+
+		</div> <!-- /.w_col -->
+
+		<div class="w_col w_B300 w_C470 w_D300 Blb Clb Dlb Dla">
+
+			{% for short_name, story_list in categories5.items %}
+
+			<section>
+
+				<h1 class="reverse">
+					<a href="">{{ pretty_name|get_item:short_name }}</a>
+				</h1>
+
+				<ul class="li1">
+
+					{% for story in story_list %}
+
+					<li><a href="{{ story.get_absolute_url }}">{{ story.headline }}</a></li>
+
+					{% endfor %}
+
+				</ul>
+
+				<footer>
+
+					<p class="jump">
+
+						<a href="">More <span>{{ pretty_name|get_item:short_name }}</span> »</a>
+
+					</p>
+
+				</footer>
+
+			</section>
+
+			{% endfor %}
+
+		</div> <!-- /.w_col -->
+
+		<div class="w_col w_B300 w_C470 w_D300 w_Bc w_Cc Bla Cla Dlb Dla">
+
+			{% for short_name, story_list in categories6.items %}
+
+			<section>
+
+				<h1 class="reverse">
+					<a href="">{{ pretty_name|get_item:short_name }}</a>
+				</h1>
+
+				<ul class="li1">
+
+					{% for story in story_list %}
+
+					<li><a href="{{ story.get_absolute_url }}">{{ story.headline }}</a></li>
+
+					{% endfor %}
+
+				</ul>
+
+				<footer>
+
+					<p class="jump">
+
+						<a href="">More <span>{{ pretty_name|get_item:short_name }}</span> »</a>
+
+					</p>
+
+				</footer>
+
+			</section>
+
+			{% endfor %}
+
+		</div> <!-- /.w_col -->
+
+		<div class="w_col w_B300 w_C470 w_D300 Blb Clb Dlb">
+
+			{% for short_name, story_list in categories7.items %}
+
+			<section>
+
+				<h1 class="reverse">
+					<a href="">{{ pretty_name|get_item:short_name }}</a>
+				</h1>
+
+				<ul class="li1">
+
+					{% for story in story_list %}
+
+					<li><a href="{{ story.get_absolute_url }}">{{ story.headline }}</a></li>
+
+					{% endfor %}
+
+				</ul>
+
+				<footer>
+
+					<p class="jump">
+
+						<a href="">More <span>{{ pretty_name|get_item:short_name }}</span> »</a>
+
+					</p>
+
+				</footer>
+
+			</section>
+
+			{% endfor %}
+
+		</div> <!-- /.w_col -->
+
+	</div> <!-- /.w_row -->
+
+	{# third row #}
+	<div class="w_row">
+
+		<div class="w_col w_B300 w_C470 w_D300 Bla Cla Dla">
+
+			{% for short_name, story_list in categories8.items %}
+
+			<section>
+
+				<h1 class="reverse">
+					<a href="">{{ pretty_name|get_item:short_name }}</a>
+				</h1>
+
+				<ul class="li1">
+
+					{% for story in story_list %}
+
+					<li><a href="{{ story.get_absolute_url }}">{{ story.headline }}</a></li>
+
+					{% endfor %}
+
+				</ul>
+
+				<footer>
+
+					<p class="jump">
+
+						<a href="">More <span>{{ pretty_name|get_item:short_name }}</span> »</a>
+
+					</p>
+
+				</footer>
+
+			</section>
+
+			{% endfor %}
+
+		</div> <!-- /.w_col -->
+
+		<div class="w_col w_B300 w_C470 w_D300 Blb Clb Dlb Dla">
+
+			{% for short_name, story_list in categories9.items %}
+
+			<section>
+
+				<h1 class="reverse">
+					<a href="">{{ pretty_name|get_item:short_name }}</a>
+				</h1>
+
+				<ul class="li1">
+
+					{% for story in story_list %}
+
+					<li><a href="{{ story.get_absolute_url }}">{{ story.headline }}</a></li>
+
+					{% endfor %}
+
+				</ul>
+
+				<footer>
+
+					<p class="jump">
+
+						<a href="">More <span>{{ pretty_name|get_item:short_name }}</span> »</a>
+
+					</p>
+
+				</footer>
+
+			</section>
+
+			{% endfor %}
+
+		</div> <!-- /.w_col -->
+
+		<div class="w_col w_B300 w_C470 w_D300 w_Bc w_Cc Bla Cla Dlb Dla">
+
+			{% for short_name, story_list in categories10.items %}
+
+			<section>
+
+				<h1 class="reverse">
+					<a href="">{{ pretty_name|get_item:short_name }}</a>
+				</h1>
+
+				<ul class="li1">
+
+					{% for story in story_list %}
+
+					<li><a href="{{ story.get_absolute_url }}">{{ story.headline }}</a></li>
+
+					{% endfor %}
+
+				</ul>
+
+				<footer>
+
+					<p class="jump">
+
+						<a href="">More <span>{{ pretty_name|get_item:short_name }}</span> »</a>
+
+					</p>
+
+				</footer>
+
+			</section>
+
+			{% endfor %}
+
+		</div> <!-- /.w_col -->
+
+		<div class="w_col w_B300 w_C470 w_D300 Blb Clb Dlb">
+
+			{% for short_name, story_list in categories11.items %}
+
+			<section>
+
+				<h1 class="reverse">
+					<a href="">{{ pretty_name|get_item:short_name }}</a>
+				</h1>
+
+				<ul class="li1">
+
+					{% for story in story_list %}
+
+					<li><a href="{{ story.get_absolute_url }}">{{ story.headline }}</a></li>
+
+					{% endfor %}
+
+				</ul>
+
+				<footer>
+
+					<p class="jump">
+
+						<a href="">More <span>{{ pretty_name|get_item:short_name }}</span> »</a>
+
+					</p>
+
+				</footer>
+
+			</section>
+
+			{% endfor %}
+
+		</div> <!-- /.w_col -->
+
+	</div> <!-- /.w_row -->
+{% endblock body %}
+
+{% block secondary %}{% endblock secondary %}

@@ -22,4 +22,5 @@ urlpatterns = patterns('',
     url(r'^nwn/index/(?P<count>\d+)/$', APCategoryCountListView.as_view(template_name = 'ap_wfm/apstory_nwn_index.html'), name='northwest_now'),
     url(r'^oregon-sports/index/(?P<count>\d+)/$', OregonSports.as_view(template_name = 'ap_wfm/apstory_category_index.html'), name='oregon_sports_index'),
     url(r'^(?P<category>[a-z]+)/index/(?P<count>\d+)/$', APCategoryCountListView.as_view(template_name = 'ap_wfm/apstory_category_index.html'), name='ap_topic_index'),
+    url(r'^index/$', 'ap_wfm.views.category_index'),
 )
