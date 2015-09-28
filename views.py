@@ -1,6 +1,7 @@
 import datetime
 from django.contrib.sites.models import Site
 from django.shortcuts import get_object_or_404, render
+from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView, ListView
 from ap_wfm.models import APStory, Category, json_response
 
@@ -174,6 +175,7 @@ class Lotteries(ListView):
             })
         return context
 
+@cache_page(60 * 5)
 def category_index(request):
     item_count = 3
     categories_dict = {
@@ -181,37 +183,37 @@ def category_index(request):
             'ore': APStory.objects.filter(category__name='ore', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j').exclude(subject_code='s').exclude(subject_code='f')[:item_count],
         },
         'categories1': {
-            'wash': APStory.objects.filter(category__name='wash', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j').exclude(subject_code='s').exclude(subject_code='f')[:item_count],
+            'wash': APStory.objects.filter(category__name='wash', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j')[:item_count],
         },
         'categories2': {
-            'top': APStory.objects.filter(category__name='top', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j').exclude(subject_code='s').exclude(subject_code='f')[:item_count],
+            'top': APStory.objects.filter(category__name='top', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j')[:item_count],
         },
         'categories3': {
-            'us': APStory.objects.filter(category__name='us', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j').exclude(subject_code='s').exclude(subject_code='f')[:item_count],
+            'us': APStory.objects.filter(category__name='us', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j')[:item_count],
         },
         'categories4': {
-            'intl': APStory.objects.filter(category__name='intl', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j').exclude(subject_code='s').exclude(subject_code='f')[:item_count],
+            'intl': APStory.objects.filter(category__name='intl', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j')[:item_count],
         },
         'categories5': {
-            'dc': APStory.objects.filter(category__name='dc', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j').exclude(subject_code='s').exclude(subject_code='f')[:item_count],
+            'dc': APStory.objects.filter(category__name='dc', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j')[:item_count],
         },
         'categories6': {
-            'politics': APStory.objects.filter(category__name='politics', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j').exclude(subject_code='s').exclude(subject_code='f')[:item_count],
+            'politics': APStory.objects.filter(category__name='politics', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j')[:item_count],
         },
         'categories7': {
-            'sports': APStory.objects.filter(category__name='sports', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j').exclude(subject_code='s').exclude(subject_code='f')[:item_count],
+            'sports': APStory.objects.filter(category__name='sports', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j')[:item_count],
         },
         'categories8': {
-            'tech': APStory.objects.filter(category__name='tech', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j').exclude(subject_code='s').exclude(subject_code='f')[:item_count],
+            'tech': APStory.objects.filter(category__name='tech', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j')[:item_count],
         },
         'categories9': {
-            'health': APStory.objects.filter(category__name='health', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j').exclude(subject_code='s').exclude(subject_code='f')[:item_count],
+            'health': APStory.objects.filter(category__name='health', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j')[:item_count],
         },
         'categories10': {
-            'sci': APStory.objects.filter(category__name='sci', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j').exclude(subject_code='s').exclude(subject_code='f')[:item_count],
+            'sci': APStory.objects.filter(category__name='sci', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j')[:item_count],
         },
         'categories11': {
-            'odd': APStory.objects.filter(category__name='odd', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j').exclude(subject_code='s').exclude(subject_code='f')[:item_count],
+            'odd': APStory.objects.filter(category__name='odd', published__lte=datetime.datetime.now()).exclude(consumer_ready=False).exclude(subject_code='j')[:item_count],
         },
     }
     categories_dict['pretty_name'] = PRETTY_NAME
