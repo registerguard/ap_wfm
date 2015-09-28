@@ -175,7 +175,7 @@ class Lotteries(ListView):
             })
         return context
 
-@cache_page(60 * 5)
+@cache_page(60 * 7)
 def category_index(request):
     item_count = 3
     categories_dict = {
