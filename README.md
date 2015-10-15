@@ -29,6 +29,11 @@ $ nohup java -jar [your_django_project]/ap_wfm/WebFeedsAgent.jar commandLine > /
 ```
 (Remember, this is only to restart. First time runinng, you must supply `userName`, `password` and `agentName`.)
 
+To see if it's running (on Linux):
+```bash
+$ ps -ef | grep java
+```
+
 To run locally
 --------------
 
