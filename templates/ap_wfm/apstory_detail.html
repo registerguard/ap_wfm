@@ -91,13 +91,33 @@
 
 							<div class="w_col w_C640 w_D980">
 
-								<div class="galleria" style="background-color: black; padding-top: 0;">
-
-								</div> <!-- /.galleria -->
+								<div class="galleria" style="background-color: black; padding-top: 0;"></div> <!-- /.galleria -->
 
 								<div class="photo-info">
-									
+
+									<p><span class="gal-count"></span> <span class="caption gal-caption">&nbsp;</span></p>
+
+									<div style="clear:both"></div>
+
 								</div> <!-- /.photo-info -->
+
+								<hr>
+
+							</div><!-- /.w_col -->
+
+						</div><!-- /.w_row -->
+
+					</section>
+
+					<script>
+					if (document.querySelector('.galleria')){
+						var galurl;
+						var galjson = [];
+						
+						galurl = '/apf/{{ object.id }}/json/';
+					};
+					</script>
+
 {% comment %}
 								<hgroup>
 
