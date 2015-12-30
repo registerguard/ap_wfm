@@ -4,7 +4,7 @@ from django.db import models
 from django.http import HttpResponse
 from django.utils import simplejson
 from ap_wfm.templatetags.humanize_list import humanize_list
-from sorl.thumbnail import ImageField
+from sorl.thumbnail import ImageField, get_thumbnail
 
 def json_response(func):
     """
@@ -95,7 +95,7 @@ class APStory(models.Model):
     
     def practical_update(self):
         '''
-        Answers the question of whether the interval between published and 
+        Answers the question of whether the interval between published and
         updated is greater than 120 seconds.
         '''
         time_diff = self.updated - self.published
@@ -125,3 +125,11 @@ class Image(models.Model):
     
     def __unicode__(self):
         return self.original_filename
+
+    def to_json_image_dict(self):
+        json_image = get_thumbnail(self.image, '990x990')
+        return {
+            'description': self.caption,
+            'byline': self.source,
+            'image': json_image.url,
+        }
