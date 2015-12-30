@@ -310,7 +310,7 @@
 
 										<h1 class="h5">
 
-											<a href="{{ latest_story.get_dt_absolute_url }}">{{ latest_story.headline }}</a>
+											<a href="{{ latest_story.get_dt_absolute_url }}">{% firstof latest_story.headline latest_story.header|striptags %}</a>
 
 										</h1>
 
@@ -397,7 +397,7 @@
 {% block footer_last %}
 
 	<!-- http://www.addthis.com/services/list -->
-	<script>var addthis_config={data_ga_property:'UA-882065-1',data_ga_social:true};</script>
+	<script>var addthis_config={data_ga_property:'UA-882065-1',data_ga_social:true},addthis_share={url:'{{ request.get_full_path }}'};</script>
 	<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=registerguard"></script>
 
 {% endblock footer_last %}
