@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView, ListView
 from ap_wfm.models import APStory, Category, json_response
+from sorl.thumbnail import get_thumbnail
 
 PRETTY_NAME = {
     'biz': 'business',

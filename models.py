@@ -76,7 +76,7 @@ class APStory(models.Model):
     slugline = models.CharField(max_length=300)
     title = models.CharField(max_length=175)
     keywords = models.CharField(max_length=180)
-    headline = models.CharField(max_length=200, blank=True)
+    headline = models.CharField(max_length=260, blank=True)
     slug = models.SlugField(max_length=300)
     body = models.TextField(blank=True)
     
