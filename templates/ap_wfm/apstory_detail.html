@@ -22,6 +22,11 @@
 
 {% block head_title %}{{ object.headline }}{% endblock head_title %}
 
+{% block head_ad_ids %}
+	{{ block.super }}
+	_ox.addAdUnit('538001072'); // Section Slider Medium Rectangle 1
+{% endblock head_ad_ids %}
+
 {% block location %}
 
 	{% if page.title or page.description_short %}
@@ -109,15 +114,15 @@
 					if (document.querySelector('.galleria')){
 						
 						var ga_category = "";
-						var ga_subcategory = "";
+						var ga_subcategory = "{{ object.category.all.0 }}";
 
-						var ga_dimension1 = "";
-						var ga_dimension2 = "";
-						var ga_dimension3 = "";
-						var ga_dimension4 = "";
-						var ga_dimension5 = "";
+						var ga_dimension1 = "{{ object.byline }}";
+						var ga_dimension2 = "{{ object.id }}";
+						var ga_dimension3 = "{{ object.updated }}";
+						var ga_dimension4 = "{{ request.get_full_path }}";
+						var ga_dimension5 = "{{ object.headline }}";
 						var ga_dimension6 = "";
-						var ga_dimension7 = "";
+						var ga_dimension7 = "{{ object.category.all.0 }}";
 
 						var galurl;
 						var galjson = [];
