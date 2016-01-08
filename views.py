@@ -37,7 +37,14 @@ def json_view(request, *args, **kwargs):
 def json_image_view(request, *args, **kwargs):
     callback_name = request.GET.get('callback', '')
     story_id = kwargs['story_id']
-    return [ im.to_json_image_dict() for im in APStory.objects.get(id=story_id).image_set.all() ]
+    json_out = []
+    for im in APStory.objects.get(id=story_id).image_set.all():
+        json_out_dict = im.to_json_image_dict()
+        if json_out_dict['image']:
+            json_out.append(json_out_dict)
+            
+    return json_out
+    # return [ im.to_json_image_dict() for im in APStory.objects.get(id=story_id).image_set.all() ]
 
 class APStoryListView(ListView):
 

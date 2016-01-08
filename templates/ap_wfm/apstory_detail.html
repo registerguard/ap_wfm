@@ -119,94 +119,18 @@
 						var ga_dimension6 = "";
 						var ga_dimension7 = "";
 
-						
 						var galurl;
 						var galjson = [];
-						
-						galurl = 'http://projects.registerguard.com/apf/{{ object.id }}/json/';
+
+						galurl = '/apf/{{ object.id }}/json/';
 					};
 					</script>
 
-{% comment %}
-								<hgroup>
-
-									<div class="streamer alt3" style="margin-top:0">
-
-										<h1><a href="{% url ap_story_multimedia page.cat object.slug %}">Multimedia</a></h1>
-
-										<h2 id="photo"><a href="#">Photo{{ all_story_images|pluralize }}</a></h2>
-
-									</div> <!-- /.streamer -->
-
-								</hgroup>
-
-								<figure>
-
-								{% with object.image_set.all as all_story_images %}
-
-									{% for story_image in all_story_images %}
-
-										{% if forloop.first %}
-
-											<a href="{% url ap_story_multimedia page.cat object.slug %}#img_{{ story_image.id }}">
-												<img src="{{ MEDIA_URL }}{% thumbnail story_image.image 980 100000 %}">
-											</a>
-
-											<figcaption>
-
-												<div class="fix">
-
-													<p class="caption" style="margin-bottom: 0">{{ story_image.caption }}</p>
-
-												</div> <!-- /.fix -->
-
-											</figcaption>
-
-										{% endif %}
-
-									{% endfor %}
-
-									</figure>
-
-									{% if forloop.last %}<hr>{% endif %}
-
-									{% if not forloop.first and all_story_images|length > 1 %}
-
-										<hr>
-
-										<figure>
-
-											<div class="pics">
-
-											{% for story_image in all_story_images %}
-
-												{% if not forloop.first %}
-
-													<div class="pics-pic" style="background-image: url({{ MEDIA_URL }}{% thumbnail story_image.image 100 100 %})">
-														<a href="{% url ap_story_multimedia page.cat object.slug %}#img_{{ story_image.id }}">&nbsp;</a>
-													</div>
-
-												{% endif %}
-
-											{% endfor %}
-
-											</div> <!-- /.pics -->
-
-										</figure>
-
-									{% endif %}
-
-								{% endwith %}
-
-							</div> <!-- /.w_col -->
-{% endcomment %}
 							<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
 
 						</div> <!-- /.w_row -->
 
 					</section>
-
-					<hr>
 
 				{% endif %}
 

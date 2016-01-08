@@ -4,6 +4,7 @@ from django.db import models
 from django.http import HttpResponse
 from django.utils import simplejson
 from ap_wfm.templatetags.humanize_list import humanize_list
+from cuddlybuddly.storage.s3.storage import S3Error
 from sorl.thumbnail import ImageField, get_thumbnail
 
 def json_response(func):
@@ -127,9 +128,16 @@ class Image(models.Model):
         return self.original_filename
 
     def to_json_image_dict(self):
-        json_image = get_thumbnail(self.image, '990x990')
-        return {
-            'description': self.caption,
-            'byline': self.source,
-            'image': json_image.url,
-        }
+        try:
+            json_image = get_thumbnail(self.image, '990x990')
+            return {
+                'description': self.caption,
+                'byline': self.source,
+                'image': json_image.url
+            }
+        except (S3Error, IOError, TypeError):
+            return {
+                'description': self.caption,
+                'byline': self.source,
+                'image': ''
+            }
