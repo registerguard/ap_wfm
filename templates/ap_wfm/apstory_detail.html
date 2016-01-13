@@ -120,7 +120,7 @@
 						var ga_dimension2 = "{{ object.id }}";
 						var ga_dimension3 = "{{ object.updated }}";
 						var ga_dimension4 = "{{ request.get_full_path }}";
-						var ga_dimension5 = "{{ object.headline }}";
+						var ga_dimension5 = "{{ object.headline|escapejs }}";
 						var ga_dimension6 = "";
 						var ga_dimension7 = "{{ object.category.all.0 }}";
 
@@ -136,6 +136,26 @@
 						</div> <!-- /.w_row -->
 
 					</section>
+
+				{% else %}
+				<!-- object.image_count: {{ object.image_count }} -->
+					{% if object.image_count = 1 %}
+					<figure>
+						
+						<img src="http://registerguard.com/csp/cms/sites/custom.rg.img.cls?id={{ object.image_set.all.0.cms_picture_id }}">
+						
+					</figure>
+					
+					<div class="photo-info" style="padding:0;">
+						
+						<p>
+							
+							<span class="caption gal-caption">{{ object.image_set.all.0.caption }}</span>
+							
+						</p>
+						
+					</div>
+					{% endif %}
 
 				{% endif %}
 
