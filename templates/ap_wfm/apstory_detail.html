@@ -16,7 +16,8 @@
 
 {% endblock comment %}
 
-{% load thumbnail_tags %}
+{# {% load thumbnail_tags %} #}
+{% load thumbnail %}
 {% load footer_links %}
 {% load splitter %}
 
@@ -86,7 +87,7 @@
 
 				<hr>
 
-				{% if object.image_count %}
+				{% if object.image_count > 1 %}
 
 					<section>
 
@@ -138,23 +139,42 @@
 					</section>
 
 				{% else %}
-				<!-- object.image_count: {{ object.image_count }} -->
-					{% if object.image_count = 1 %}
-					<figure>
-						
-						<img src="http://registerguard.com/csp/cms/sites/custom.rg.img.cls?id={{ object.image_set.all.0.cms_picture_id }}">
-						
-					</figure>
 					
-					<div class="photo-info" style="padding:0;">
+					{% if object.image_count = 1 %}
+					<section>
 						
-						<p>
+						<div class="w_row">
 							
-							<span class="caption gal-caption">{{ object.image_set.all.0.caption }}</span>
+							<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
 							
-						</p>
+							<div class ="w_col w_C640 w_D980">
+								
+								<figure>
+								
+								{% with object.image_set.all.0 as ap_image %}
+									
+									{% thumbnail ap_image.image "990x990" as im %}
+										<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ ap_image.alt_text }}">
+										
+										<div class="photo-info" style="padding:0;">
+											<p><span class="caption gal-caption">{{ ap_image.caption }}</span></p>
+										</div>
+										
+									{% endthumbnail %}
+									
+								{% endwith %}
+								
+								</figure>
+								
+								<hr>
+								
+							</div> <!-- /.w_col -->
+							
+							<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
+							
+						</div> <!-- /.w_row -->
 						
-					</div>
+					</section>
 					{% endif %}
 
 				{% endif %}
