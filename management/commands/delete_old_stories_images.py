@@ -12,6 +12,10 @@ from django.core.management.base import BaseCommand, CommandError
 # http://stackoverflow.com/questions/3140779/how-to-delete-files-from-amazon-s3-bucket/3264960#3264960
 # Some code to look at:
 # https://github.com/pcraciunoiu/django-s3sync/blob/master/s3sync/management/commands/s3sync_media.py
+# 
+# process the files in S3 based on their timestamp using python and boto
+# http://stackoverflow.com/questions/29393372/process-the-files-in-s3-based-on-their-timestamp-using-python-and-boto
+
 
 '''
 Required settings.py variables:
@@ -26,10 +30,6 @@ Default is 60 days.
 
 '''
 
-'''
-process the files in S3 based on their timestamp using python and boto
-http://stackoverflow.com/questions/29393372/process-the-files-in-s3-based-on-their-timestamp-using-python-and-boto
-'''
 
 try:
     from boto.s3.connection import S3Connection, Bucket, Key
