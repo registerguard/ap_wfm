@@ -26,6 +26,11 @@ Default is 60 days.
 
 '''
 
+'''
+process the files in S3 based on their timestamp using python and boto
+http://stackoverflow.com/questions/29393372/process-the-files-in-s3-based-on-their-timestamp-using-python-and-boto
+'''
+
 try:
     from boto.s3.connection import S3Connection, Bucket, Key
 except ImportError, err:
