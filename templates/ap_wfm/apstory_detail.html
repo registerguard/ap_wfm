@@ -22,11 +22,6 @@
 
 {% block head_title %}{{ object.headline }}{% endblock head_title %}
 
-{% block head_ad_ids %}
-	{{ block.super }}
-	_ox.addAdUnit('538001072'); // Section Slider Medium Rectangle 1
-{% endblock head_ad_ids %}
-
 {% block location %}
 
 	{% if page.title or page.description_short %}
@@ -237,7 +232,7 @@
 									<div class="deep">
 
 										<!-- //////////////////// Medium Rectangle 1 \\\\\\\\\\\\\\\\\\\\ -->
-										<div class="advert"><div id="medium-rectangle-1"><script>_ox.showAdUnit('537200298');</script></div></div>
+										<div id='medium-rectangle-1'><script>googletag.cmd.push(function() { googletag.display('medium-rectangle-1'); });</script></div>
 										<!-- \\\\\\\\\\\\\\\\\\\\ Medium Rectangle 1 //////////////////// -->
 
 									</div> <!-- /.deep -->
