@@ -2,7 +2,7 @@
 
 {% block head_ad_vars %}
 	
-	_ox.addVariable('s', 'news');
-	_ox.addVariable('c', 'ap');
+	// Add AP subcategory for targeting
+	googletag.pubads().setTargeting('rgm_subcat',['ap'])
 	
 {% endblock head_ad_vars %}
