@@ -25,7 +25,7 @@
 {% block head_ad_ids %}
 	// If desktop, serve weather widget
 	if (document.documentElement.clientWidth >= 1005){
-		googletag.defineSlot('/30582678/RGM/news', [120, 60], 'ros-weather-widget')
+		googletag.defineSlot('/30582678/RGM', [120, 60], 'ros-weather-widget')
 			.setTargeting('pos', ['rgm_weather_widget'])
 			.addService(googletag.pubads());
 	}
@@ -254,7 +254,7 @@
 
 								{% if forloop.counter == 3 %}
 
-									<div class="deep">
+									<div class="deep" style="margin-bottom:20px;">
 
 										<!-- //////////////////// Medium Rectangle 1 \\\\\\\\\\\\\\\\\\\\ -->
 										<div class='advert'><div id='medium-rectangle-1'><script>googletag.cmd.push(function() { googletag.display('medium-rectangle-1'); });</script></div></div>
@@ -264,6 +264,17 @@
 
 								{% endif %}
 
+								{% if forloop.counter == 8 %}
+								
+								<div class="deep">
+									
+									<!-- //////////////////// Medium Rectangle 2 \\\\\\\\\\\\\\\\\\\\ -->
+									<div class="advert"><div id='medium-rectangle-2'><script>googletag.cmd.push(function() { googletag.display('medium-rectangle-2'); });</script></div></div>
+									<!-- \\\\\\\\\\\\\\\\\\\\ Medium Rectangle 2 //////////////////// -->
+									
+								</div> <!-- /.deep -->
+								{% endif %}
+								
 								{# Note: This is "p | urlize" #}
 								{{ p|urlize }}</p>
 
