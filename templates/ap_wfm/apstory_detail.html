@@ -23,28 +23,38 @@
 {% block head_title %}{{ object.headline }}{% endblock head_title %}
 
 {% block head_ad_ids %}
-	// If desktop, serve weather widget
-	if (document.documentElement.clientWidth >= 1005){
-		googletag.defineSlot('/30582678/RGM', [120, 60], 'ros-weather-widget')
-			.setTargeting('pos', ['rgm_weather_widget'])
-			.addService(googletag.pubads());
-	}
 
-	// Define ad units
-	googletag.defineSlot('/30582678/RGM', [[320, 50], [728, 90]], 'leaderboard-top')
-		.setTargeting('pos', ['atf']) // Above the fold
-		.defineSizeMapping(mapping)
-		.addService(googletag.pubads());
-	googletag.defineSlot('/30582678/RGM', [300, 250], 'medium-rectangle-1')
-		.setTargeting('pos', ['rgm_one'])
-		.addService(googletag.pubads());
-	googletag.defineSlot('/30582678/RGM', [300, 250], 'medium-rectangle-2')
-		.setTargeting('pos', ['rgm_two'])
-		.addService(googletag.pubads());
-	googletag.defineSlot('/30582678/RGM', [[320, 50], [728, 90]], 'leaderboard-bottom')
-		.setTargeting('pos', ['btf']) // Below the fold
-		.defineSizeMapping(mapping)
-		.addService(googletag.pubads());
+	{% with ps=object.body|splitter:"</p>"|slice:"0:-1" %}
+
+		// If desktop, serve weather widget
+		if (document.documentElement.clientWidth >= 1005){
+			googletag.defineSlot('/30582678/RGM', [120, 60], 'ros-weather-widget')
+				.setTargeting('pos', ['rgm_weather_widget'])
+				.addService(googletag.pubads());
+		}
+
+		// Define ad units
+		googletag.defineSlot('/30582678/RGM', [[320, 50], [728, 90]], 'leaderboard-top')
+			.setTargeting('pos', ['atf']) // Above the fold
+			.defineSizeMapping(mapping)
+			.addService(googletag.pubads());
+		{% if ps|length > 2 %} {# check for at least 2 paragrafs before setting tag #}
+		googletag.defineSlot('/30582678/RGM', [300, 250], 'medium-rectangle-1')
+			.setTargeting('pos', ['rgm_one'])
+			.addService(googletag.pubads());
+		{% endif %}
+		{% if ps|length > 7 %} {# check for at least 7 paragrafs before setting tag #}
+		googletag.defineSlot('/30582678/RGM', [300, 250], 'medium-rectangle-2')
+			.setTargeting('pos', ['rgm_two'])
+			.addService(googletag.pubads());
+		{% endif %}
+		googletag.defineSlot('/30582678/RGM', [[320, 50], [728, 90]], 'leaderboard-bottom')
+			.setTargeting('pos', ['btf']) // Below the fold
+			.defineSizeMapping(mapping)
+			.addService(googletag.pubads());
+
+	{% endwith %}
+
 {% endblock head_ad_ids %}
 
 {% block location %}
@@ -248,7 +258,7 @@
 					<div id="story">
 
 						{# https://github.com/registerguard/tracker/issues/541 & 542 #}
-						{% with object.body|splitter:"</p>"|slice:"0:-1" as ps %}
+						{% with ps=object.body|splitter:"</p>"|slice:"0:-1" %}
 
 							{% for p in ps %}
 
