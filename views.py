@@ -58,7 +58,7 @@ class APStoryListView(ListView):
         context = super(APStoryListView, self).get_context_data(**kwargs)
         context.update({
             'current_site': Site.objects.get_current(),
-            'page': {'title': 'The very latest from across The Associated Press'},
+            'page': {'title': 'The Associated Press', 'description_short': 'All'},
         })
         return context
 
