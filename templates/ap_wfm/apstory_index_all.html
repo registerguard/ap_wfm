@@ -1,7 +1,7 @@
 {% extends "ap_wfm/ap_wfm.html" %}
 
 {% load get_url_content %}
-{% load thumbnail_tags %}
+{% load thumbnail_tags %}{# django-cuddlybuddly-thumbnail #}
 
 {% block head_title %}{{ page.title|title }} | The Associated Press{% endblock head_title %}
 
@@ -51,10 +51,6 @@
 
 									<h3 class="label">{{ apstory.location }}{% if apstory.location and apstory.contributor %} | {% endif %}{% if apstory.contributor %}{{ apstory.contributor }}{% endif %}</h3>
 
-									<h1 class="h5">
-										<a href="http://{{ current_site }}{% url ap_story_detail apstory.category.all.0 apstory.slug %}">{% firstof apstory.headline apstory.title %}</a>
-									</h1>
-
 								</hgroup>
 
 							</header>
@@ -64,6 +60,10 @@
 								{% if apstory.image_count > 0 %}
 								<img src="{{ MEDIA_URL }}{% thumbnail apstory.image_set.all.0.image 100 100 %}" alt="{{ apstory.image_set.0.alt_text }}">
 								{% endif %}
+
+								<h1 class="h5">
+									<a href="http://{{ current_site }}{% url ap_story_detail apstory.category.all.0 apstory.slug %}">{% firstof apstory.headline apstory.title %}</a>
+								</h1>
 
 							</div>
 
