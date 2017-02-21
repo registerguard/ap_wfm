@@ -58,7 +58,7 @@
 							<div class="fix">
 
 								{% if apstory.image_count > 0 %}
-								<img src="{{ MEDIA_URL }}{% thumbnail apstory.image_set.all.0.image 100 100 %}" alt="{{ apstory.image_set.0.alt_text }}">
+								<img class="imgl" src="{{ MEDIA_URL }}{% thumbnail apstory.image_set.all.0.image 100 100 %}" alt="{{ apstory.image_set.0.alt_text }}">
 								{% endif %}
 
 								<h1 class="h5">
