@@ -1,6 +1,7 @@
 {% extends "ap_wfm/ap_wfm.html" %}
 
 {% load get_url_content %}
+{% load adicio_widget %}
 {% load thumbnail_tags %}{# django-cuddlybuddly-thumbnail #}
 
 {% block head_title %}{{ page.title|title }} | The Associated Press{% endblock head_title %}
@@ -34,9 +35,9 @@
 
 <section>
 
-	<div class="w_row give">
+	<div class="w_row">
 
-		<div class="w_col w_B300 w_C640 w_D980 Bla Cla Dla">
+		<div class="give w_col w_B300 w_C640 w_D980 Bla Cla Dla">
 
 			{% for apstory in object_list %}
 
@@ -86,7 +87,7 @@
 
 		<div class="w_col w_B300 Blb Clb Dlb">
 			
-			<div class="wrap">
+			<div class="give wrap">
 				
 				<!-- //////////////////// Medium Rectangle 1 \\\\\\\\\\\\\\\\\\\\ -->
 				<div class='advert'><div id='medium-rectangle-1'><script>googletag.cmd.push(function() { googletag.display('medium-rectangle-1'); });</script></div></div>
@@ -95,7 +96,7 @@
 				<hr>
 				
 				<!-- //////////////////// ROS Adicio Widget \\\\\\\\\\\\\\\\\\\\ -->
-				<div class="advert"><div id="ros-adicio-widget"><script>_ox.showAdUnit('278420');</script></div></div>
+				{% get_adicio_widget %}
 				<!-- \\\\\\\\\\\\\\\\\\\\ ROS Adicio Widget //////////////////// -->
 				
 				<hr>
