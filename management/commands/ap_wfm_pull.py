@@ -6,6 +6,9 @@ import requests
 
 # http://syndication.ap.org/AP.Distro.Feed/GetFeed.aspx?idList=694439&idListType=savedsearches&fullContent=nitf
 
+'''
+694439   APExchange saved search "Fact Check-JH"
+'''
 
 class Command(BaseCommand):
 
