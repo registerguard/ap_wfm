@@ -1,6 +1,33 @@
 {% extends "ap_wfm/ap_wfm.html" %}
+{% load get_url_content %}
+{% load adicio_widget %}
 
 {% block head_title %}{{ page.title|title }} | {{ page.description_short }}{% endblock head_title %}
+
+{% block head_ad_ids %}
+	// If desktop, serve weather widget
+	if (document.documentElement.clientWidth >= 1005){
+		googletag.defineSlot('/30582678/RGM', [120, 60], 'ros-weather-widget')
+			.setTargeting('pos', ['rgm_weather_widget'])
+			.addService(googletag.pubads());
+	}
+
+	// Define ad units
+	googletag.defineSlot('/30582678/RGM', [[320, 50], [728, 90]], 'leaderboard-top')
+		.setTargeting('pos', ['atf']) // Above the fold
+		.defineSizeMapping(mapping)
+		.addService(googletag.pubads());
+	googletag.defineSlot('/30582678/RGM', [300, 250], 'medium-rectangle-1')
+		.setTargeting('pos', ['rgm_one'])
+		.addService(googletag.pubads());
+	googletag.defineSlot('/30582678/RGM', [300, 250], 'medium-rectangle-2')
+		.setTargeting('pos', ['rgm_two'])
+		.addService(googletag.pubads());
+	googletag.defineSlot('/30582678/RGM', [[320, 50], [728, 90]], 'leaderboard-bottom')
+		.setTargeting('pos', ['btf']) // Below the fold
+		.defineSizeMapping(mapping)
+		.addService(googletag.pubads());
+{% endblock head_ad_ids %}
 
 {% block content %}
 
@@ -82,6 +109,43 @@
 			
 		</div> <!-- .w_col -->
 		
+
+		
+		<div class="w_col w_B300 Blb Clb Dlb">
+			
+			<div class="wrap give">
+				
+				<!-- //////////////////// Medium Rectangle 1 \\\\\\\\\\\\\\\\\\\\ -->
+				<div class='advert'><div id='medium-rectangle-1'><script>googletag.cmd.push(function() { googletag.display('medium-rectangle-1'); });</script></div></div>
+				<!-- \\\\\\\\\\\\\\\\\\\\ Medium Rectangle 1 //////////////////// -->
+				
+				<hr>
+				
+				<!-- //////////////////// ROS Adicio Widget \\\\\\\\\\\\\\\\\\\\ -->
+				{% get_adicio_widget %}
+				<!-- \\\\\\\\\\\\\\\\\\\\ ROS Adicio Widget //////////////////// -->
+				
+				<hr>
+				
+				<!-- //////////////////// Medium Rectangle 2 \\\\\\\\\\\\\\\\\\\\ -->
+				<div class="advert"><div id='medium-rectangle-2'><script>googletag.cmd.push(function() { googletag.display('medium-rectangle-2'); });</script></div></div>
+				<!-- \\\\\\\\\\\\\\\\\\\\ Medium Rectangle 2 //////////////////// -->
+				
+				<hr>
+				
+				{% geturl "http://go.registerguard.com/entertainment/go_widget2/4/" 30 %}
+				
+				<hr>
+				
+				<!-- //////////////////// ROS Medium Rectangle 3 \\\\\\\\\\\\\\\\\\\\ -->
+				<div class="advert"><div id="ros-medium-rectangle-3"><script>_ox.showAdUnit('537200305');</script></div></div>
+				<!-- \\\\\\\\\\\\\\\\\\\\ ROS Medium Rectangle 3 //////////////////// -->
+				
+			</div> <!-- /.wrap -->
+			
+		</div> <!-- /.w_col -->
+
+
 	</div> <!-- .w_row -->
 	
 {% endblock content %}

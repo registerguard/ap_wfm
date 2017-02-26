@@ -1,58 +1,129 @@
 {% extends "ap_wfm/ap_wfm.html" %}
 
-{% load thumbnail_tags %}
+{% load get_url_content %}
+{% load adicio_widget %}
+{% load thumbnail_tags %}{# django-cuddlybuddly-thumbnail #}
 
 {% block head_title %}{{ page.title|title }} | The Associated Press{% endblock head_title %}
+
+{% block head_ad_ids %}
+	// If desktop, serve weather widget
+	if (document.documentElement.clientWidth >= 1005){
+		googletag.defineSlot('/30582678/RGM', [120, 60], 'ros-weather-widget')
+			.setTargeting('pos', ['rgm_weather_widget'])
+			.addService(googletag.pubads());
+	}
+
+	// Define ad units
+	googletag.defineSlot('/30582678/RGM', [[320, 50], [728, 90]], 'leaderboard-top')
+		.setTargeting('pos', ['atf']) // Above the fold
+		.defineSizeMapping(mapping)
+		.addService(googletag.pubads());
+	googletag.defineSlot('/30582678/RGM', [300, 250], 'medium-rectangle-1')
+		.setTargeting('pos', ['rgm_one'])
+		.addService(googletag.pubads());
+	googletag.defineSlot('/30582678/RGM', [300, 250], 'medium-rectangle-2')
+		.setTargeting('pos', ['rgm_two'])
+		.addService(googletag.pubads());
+	googletag.defineSlot('/30582678/RGM', [[320, 50], [728, 90]], 'leaderboard-bottom')
+		.setTargeting('pos', ['btf']) // Below the fold
+		.defineSizeMapping(mapping)
+		.addService(googletag.pubads());
+{% endblock head_ad_ids %}
 
 {% block content %}
 
 <section>
 
-	<h1 id="archive" class="head head1 give">The very latest from across The Associated Press</h1>
+	<div class="w_row">
 
-	{% for apstory in object_list %}
+		<div class="w_col w_B300 w_C640 w_D980 Bla Cla Dla">
+			
+			<div class="wrap give">
 
-		{% if apstory.category.all.0 %}
-			<article>
+			{% for apstory in object_list %}
 
-				<div class="force">
+				{% if apstory.category.all.0 %}
+					<article>
 
-					<header>
+						<div class="force">
 
-						<hgroup>
+							<header>
 
-							<h3 class="label">{{ apstory.location }}{% if apstory.location and apstory.contributor %} | {% endif %}{% if apstory.contributor %}{{ apstory.contributor }}{% endif %}</h3>
+								<hgroup>
 
-							<h1 class="h5">
-								<a href="http://{{ current_site }}{% url ap_story_detail apstory.category.all.0 apstory.slug %}">{% firstof apstory.headline apstory.title %}</a>
-							</h1>
+									<h3 class="label">{{ apstory.location }}{% if apstory.location and apstory.contributor %} | {% endif %}{% if apstory.contributor %}{{ apstory.contributor }}{% endif %}</h3>
 
-						</hgroup>
+								</hgroup>
 
-					</header>
+							</header>
 
-					<div class="fix">
+							<div class="fix">
 
-						{% if apstory.image_count > 0 %}
-						<img src="{{ MEDIA_URL }}{% thumbnail apstory.image_set.all.0.image 100 100 %}" alt="{{ apstory.image_set.0.alt_text }}">
-						{% endif %}
+								{% if apstory.image_count > 0 %}
+								<img class="imgl" src="{{ MEDIA_URL }}{% thumbnail apstory.image_set.all.0.image 100 100 %}" alt="{{ apstory.image_set.0.alt_text }}">
+								{% endif %}
 
-					</div>
+								<h1 class="h5">
+									<a href="http://{{ current_site }}{% url ap_story_detail apstory.category.all.0 apstory.slug %}">{% firstof apstory.headline apstory.title %}</a>
+								</h1>
 
-					<h2 class="sh6">
+							</div>
 
-						Updated: <a href="http://{{ current_site }}{% url ap_story_detail apstory.category.all.0 apstory.slug %}">{{ apstory.updated }} ({{ apstory.updated|timesince }} ago)</a>
+							<h2 class="sh6">
 
-					</h2>
+								Updated: <a href="http://{{ current_site }}{% url ap_story_detail apstory.category.all.0 apstory.slug %}">{{ apstory.updated }} ({{ apstory.updated|timesince }} ago)</a>
 
-				</div>
+							</h2>
 
-			</article>
+						</div>
 
-			<hr>
-		{% endif %}
+					</article>
 
-	{% endfor %}
+					<hr>
+				{% endif %}
+
+			{% endfor %}
+			
+			</div> <!-- /.wrap -->
+			
+		</div> <!-- /.w_col -->
+
+		<div class="w_col w_B300 Blb Clb Dlb">
+			
+			<div class="wrap give">
+				
+				<!-- //////////////////// Medium Rectangle 1 \\\\\\\\\\\\\\\\\\\\ -->
+				<div class='advert'><div id='medium-rectangle-1'><script>googletag.cmd.push(function() { googletag.display('medium-rectangle-1'); });</script></div></div>
+				<!-- \\\\\\\\\\\\\\\\\\\\ Medium Rectangle 1 //////////////////// -->
+				
+				<hr>
+				
+				<!-- //////////////////// ROS Adicio Widget \\\\\\\\\\\\\\\\\\\\ -->
+				{% get_adicio_widget %}
+				<!-- \\\\\\\\\\\\\\\\\\\\ ROS Adicio Widget //////////////////// -->
+				
+				<hr>
+				
+				<!-- //////////////////// Medium Rectangle 2 \\\\\\\\\\\\\\\\\\\\ -->
+				<div class="advert"><div id='medium-rectangle-2'><script>googletag.cmd.push(function() { googletag.display('medium-rectangle-2'); });</script></div></div>
+				<!-- \\\\\\\\\\\\\\\\\\\\ Medium Rectangle 2 //////////////////// -->
+				
+				<hr>
+				
+				{% geturl "http://go.registerguard.com/entertainment/go_widget2/4/" 30 %}
+				
+				<hr>
+				
+				<!-- //////////////////// ROS Medium Rectangle 3 \\\\\\\\\\\\\\\\\\\\ -->
+				<div class="advert"><div id="ros-medium-rectangle-3"><script>_ox.showAdUnit('537200305');</script></div></div>
+				<!-- \\\\\\\\\\\\\\\\\\\\ ROS Medium Rectangle 3 //////////////////// -->
+				
+			</div> <!-- /.wrap -->
+			
+		</div> <!-- /.w_col -->
+
+	</div> <!-- /.w_row -->
 
 </section>
 
