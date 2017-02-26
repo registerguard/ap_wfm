@@ -216,7 +216,7 @@ The solution is to open up the write permissions on
                     continue
 
                 try:
-                    headline = getattr(e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].ExtendedHeadLine, "text", '')
+                    headline = getattr(e['{http://ap.org/schemas/03/2005/apcm}ContentMetadata'].HeadLine, "text", '')
                 except AttributeError:
                     headline = ''
 
@@ -493,6 +493,13 @@ The solution is to open up the write permissions on
                                     (ap_orig_file_name, ap_ext) = media_meta.attrib['value'].split('.')
                                     orig_file_name = '%s-%s.%s' % (ap_orig_file_name, media_name_hash, ap_ext)
                                     break
+                                if orig_file_name == '' and '.jp' in alt_text:
+                                    # OriginalFileName field isn't in Region
+                                    # photos, but the alt_text value seems to
+                                    # be the original file name in these Region
+                                    # photos XML feeds
+                                    orig_file_name = alt_text
+
                             try:
                                 file_name = orig_file_name
                             except:
@@ -513,6 +520,9 @@ The solution is to open up the write permissions on
 
                                 try:
                                     try:
+                                        # I think this lookup could be a trouble
+                                        # spot as there could be an Image in DB
+                                        # with an orig_file_name of ''
                                         img = Image.objects.get(original_filename = orig_file_name)
                                     except MultipleObjectsReturned, err:
                                         logger.debug('      Tried %s; but there was an error: %s' % (img.original_filename, err))
