@@ -487,18 +487,18 @@ The solution is to open up the write permissions on
                             orig_file_name = ''
                             media_metas = media_item.iterfind('media-metadata')
                             for media_meta in media_metas:
+                                media_name_hash = media_meta.attrib['id'].split(':')[1]
                                 if media_meta.attrib['name'] == 'OriginalFileName':
-                                    media_name_hash = media_meta.attrib['id'].split(':')[1]
                                     # AP mixes extension with file name. Need to split apart ...
                                     (ap_orig_file_name, ap_ext) = media_meta.attrib['value'].split('.')
                                     orig_file_name = '%s-%s.%s' % (ap_orig_file_name, media_name_hash, ap_ext)
                                     break
-                                if orig_file_name == '' and '.jp' in alt_text:
+                                if orig_file_name == '':
                                     # OriginalFileName field isn't in Region
                                     # photos, but the alt_text value seems to
                                     # be the original file name in these Region
                                     # photos XML feeds
-                                    orig_file_name = alt_text
+                                    orig_file_name = media_name_hash
 
                             try:
                                 file_name = orig_file_name
