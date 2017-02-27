@@ -445,7 +445,7 @@ The solution is to open up the write permissions on
                 # This regex for caption "OUT" clean-up below.
                 # A test/experimental script: ~/Scripts/Python/regex_trim_from_end.py
                 # Also, https://regex101.com/#python with the "g" modifier
-                regex = re.compile(r"(\b[A-Z0-9, /:;.-]+\b\.?)$")
+                regex = re.compile(r"(\b[A-Z, /:;.-]+\b\.?)$")
 
                 if media_items:
 
