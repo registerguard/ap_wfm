@@ -470,8 +470,12 @@ The solution is to open up the write permissions on
             #                 if media_item['media-reference'][1].attrib['name'] == "AP Preview Image":
                             print '    Media ref.:', media_item['media-reference'].attrib['source']
                             photo_url = media_item['media-reference'].attrib['source']
+                            media_name_hash = media_item['media-reference'].attrib['id'].split(':')[1]
                             try:
                                 alt_text = media_item['media-reference'][1].attrib['alternate-text']
+                                # For use by non-AP staff, Oregon Marketplace/Region images below
+                                orig_file_name = alt_text
+                                ap_ext = 'jpg'
                             except KeyError, err:
                                 logger.debug('      No alternate-text in a photo associated with %s' % e.title.text)
                                 alt_text = 'AP image'
@@ -483,27 +487,17 @@ The solution is to open up the write permissions on
 
                             # munge through the many media-metadata elements that
                             # accompany each image to find the first reference
-                            # to OriginalFileName ...
-                            orig_file_name = ''
+                            # to OriginalFileName (only found in staff AP images/
+                            # non-Oregon Marketplace/Region images) ...
                             media_metas = media_item.iterfind('media-metadata')
                             for media_meta in media_metas:
-                                media_name_hash = media_meta.attrib['id'].split(':')[1]
                                 if media_meta.attrib['name'] == 'OriginalFileName':
-                                    # AP mixes extension with file name. Need to split apart ...
-                                    (ap_orig_file_name, ap_ext) = media_meta.attrib['value'].split('.')
-                                    orig_file_name = '%s-%s.%s' % (ap_orig_file_name, media_name_hash, ap_ext)
+                                    # AP includes extension in OriginalFileName
+                                    # 'value'. Need to split apart.
+                                    (orig_file_name, ap_ext) = media_meta.attrib['value'].split('.')
                                     break
-                                if orig_file_name == '':
-                                    # OriginalFileName field isn't in Region
-                                    # photos, but the alt_text value seems to
-                                    # be the original file name in these Region
-                                    # photos XML feeds
-                                    orig_file_name = media_name_hash
 
-                            try:
-                                file_name = orig_file_name
-                            except:
-                                file_name = 'temp_AP_photo_file.jpg'
+                            orig_file_name = '%s-%s.%s' % (orig_file_name, media_name_hash, ap_ext)
 
                             try:
                                 img_temp = NamedTemporaryFile(delete=True)
@@ -535,7 +529,7 @@ The solution is to open up the write permissions on
                                         APStory_instance.image_set.add(img)
                                 except Image.DoesNotExist:
                                     logger.debug('      Didn\'t find image %s; downloading ... ' % orig_file_name)
-                                    im.image.save(file_name, File(img_temp))
+                                    im.image.save(orig_file_name, File(img_temp))
 
                             except urllib2.HTTPError:
                                 logger.debug('IMAGE NOT IMPORTING. You may not have the AP Web Feeds manager running. It needs to be.')
