@@ -380,7 +380,8 @@ The solution is to open up the write permissions on
 
     #                 old_version_qs = APStory.objects.filter( slug=slugify(e.title.text), category=ap_cat ) | APStory.objects.filter( management_id=management_id, category=ap_cat ).order_by('-id')
     #                 old_version_qs = APStory.objects.filter( slug=slugify(e.title.text), category=ap_cat ) | APStory.objects.filter( management_id=management_id, category=ap_cat ).order_by('-id')
-                    old_version_qs = ( APStory.objects.filter( slug=slugify(e.title.text) ) | APStory.objects.filter( management_id=management_id ) ).order_by('-id')
+                    # old_version_qs = ( APStory.objects.filter( slug=slugify(e.title.text) ) | APStory.objects.filter( management_id=management_id ) ).order_by('-id')
+                    old_version_qs = APStory.objects.filter( management_id=management_id ).order_by('-id')
                     logger.debug( 'XXX Older version look-up based on slug: \'%s\', management_id: %s XXX' % (slugify(e.title.text), management_id) )
                     if old_version_qs:
                         if len(old_version_qs) > 1:
