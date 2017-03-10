@@ -321,7 +321,7 @@ The solution is to open up the write permissions on
                     ap_subject_code = ''
 
                 # A one-off to change 'BC-OR--Portland Stocks, OR' into 'Portland Stocks'
-                if ap_subject_code == 'f' and (ap_content_feed == 'Oregon-JH') and headline.count('-'):
+                if ap_subject_code == 'f' and (ap_content_feed == 'Oregon-JH' and headline.count('-')):
                     headline = keywords
                     body_text = body_text.replace('&lt;</td>', '</td>')
                     body_text = body_text.replace(';', '</td><td>')
