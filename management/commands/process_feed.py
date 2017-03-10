@@ -136,6 +136,8 @@ The solution is to open up the write permissions on
                 logger.debug('>>> Skip Title fragments: %s' % str(skip_title_fragments))
 
             for e in tree.entry:
+                logger.debug(' ')
+                logger.debug('============')
                 logger.debug('    %s' % e.title.text)
 
                 if 'New York Times' in e.rights.text:
@@ -319,7 +321,7 @@ The solution is to open up the write permissions on
                     ap_subject_code = ''
 
                 # A one-off to change 'BC-OR--Portland Stocks, OR' into 'Portland Stocks'
-                if ap_subject_code == 'f' and (ap_content_feed == 'Oregon-JH'):
+                if ap_subject_code == 'f' and (ap_content_feed == 'Oregon-JH') and headline.count('-'):
                     headline = keywords
                     body_text = body_text.replace('&lt;</td>', '</td>')
                     body_text = body_text.replace(';', '</td><td>')
@@ -380,8 +382,8 @@ The solution is to open up the write permissions on
 
     #                 old_version_qs = APStory.objects.filter( slug=slugify(e.title.text), category=ap_cat ) | APStory.objects.filter( management_id=management_id, category=ap_cat ).order_by('-id')
     #                 old_version_qs = APStory.objects.filter( slug=slugify(e.title.text), category=ap_cat ) | APStory.objects.filter( management_id=management_id, category=ap_cat ).order_by('-id')
-                    # old_version_qs = ( APStory.objects.filter( slug=slugify(e.title.text) ) | APStory.objects.filter( management_id=management_id ) ).order_by('-id')
-                    old_version_qs = APStory.objects.filter( management_id=management_id ).order_by('-id')
+                    old_version_qs = ( APStory.objects.filter( slug=slugify(e.title.text) ) | APStory.objects.filter( management_id=management_id ) ).order_by('-id')
+                    # old_version_qs = APStory.objects.filter( management_id=management_id ).order_by('-id')
                     logger.debug( 'XXX Older version look-up based on slug: \'%s\', management_id: %s XXX' % (slugify(e.title.text), management_id) )
                     if old_version_qs:
                         if len(old_version_qs) > 1:
@@ -425,6 +427,7 @@ The solution is to open up the write permissions on
                     else:
                         # Save the newest one ...
                         APStory_instance.save()
+                        logger.debug('XXX CREATED {0} XXX'.format(e.title.text))
 
                     if old_cats:
                         for salvaged_cat in old_cats:
