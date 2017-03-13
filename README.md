@@ -42,6 +42,15 @@ $ ps -ef | grep java
 To run locally
 --------------
 
+The key to getting it to run locally from within a virtual environment (so as to mimic a production type of environment) is to set the shebang on the first line of `call_process_feed.py` to the path of the virtual environment Python, e.g.:
+
+```python
+#!/Users/mac_username/Development/.virtualenvs/virtual_env_name/bin/python
+
+```
+
+**Another tip:** Set the logging level via the `AP WebFeeds Manager` website interface to `Debug`. (Profiles => Profile Preferences tab => Logging => Log level dropdown) Then search for `SCRIPT OUTPUT` lines and the word "Traceback" for Python errors.
+
 To get the ingestion script to run with a local, development set of settings:  
 `python manage.py process_feed /Users/jheasly/Development/ap_wfm/WFA/feeds/All-TopHeadlines-JH/feed_644355_2015-06-02T16-39-38.445Z.xml --settings=test_root.local_settings`
 
