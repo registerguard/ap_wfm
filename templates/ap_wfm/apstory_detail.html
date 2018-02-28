@@ -57,6 +57,15 @@
 
 {% endblock head_ad_ids %}
 
+{% block head_extra %}
+	<meta property="og:title" content="{{ object.headline }}">
+	{% with object.image_set.all.0 as ap_image %}
+		{% thumbnail ap_image.image "990x990" as im %}
+			<meta property="og:image" content="{{ im.url }}">
+		{% endthumbnail %}
+	{% endwith %}
+{% endblock head_extra %}
+
 {% block location %}
 
 	{% if page.title or page.description_short %}
@@ -423,7 +432,7 @@
 	<script src="//registerguard.com/csp/cms/sites/rg/assets/includes/slider02.csp"></script>
 
 	<!-- http://www.addthis.com/services/list -->
-	<script>var addthis_config={data_ga_property:'UA-882065-1',data_ga_social:true},addthis_share={url:'{{ request.get_full_path }}'};</script>
+	<script>var addthis_config={data_ga_property:'UA-882065-1',data_ga_social:true},addthis_share={url:'{{ object.get_absolute_url }}'};</script>
 	<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=registerguard"></script>
 
 {% endblock footer_last %}
