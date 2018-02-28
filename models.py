@@ -88,7 +88,7 @@ class APStory(models.Model):
         return '%s ID:%s' % (self.headline, self.id)
 
     def get_absolute_url(self):
-        return '//{0}/apf/{1}/{2}/'.format(Site.objects.get_current().name, self.category.all()[0].get_name_display(), self.slug)
+        return '//{0}/apf/{1}/{2}/'.format('projects.registerguard.com', self.category.all()[0].get_name_display(), self.slug)
 
     def image_count(self):
         return self.image_set.count()
