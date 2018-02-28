@@ -1,5 +1,6 @@
 *.py[co]
 .DS_Store
+.vscode
 
 .Python
 include/
