@@ -65,8 +65,12 @@
 	{% with object.image_set.all.0 as ap_image %}
 		{% thumbnail ap_image.image "990x990" as im %}
 			<meta property="twitter:image" content="{{ im.url }}" />
+			<meta property="og:image" content="{{ im.url }}" />
 		{% endthumbnail %}
 	{% endwith %}
+	<meta property="og:url" content="{{ object.get_absolute_url }}" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="{{ object.headline }}" />
 {% endblock head_extra %}
 
 {% block location %}
