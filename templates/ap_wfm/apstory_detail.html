@@ -57,22 +57,6 @@
 
 {% endblock head_ad_ids %}
 
-{% block head_extra %}
-	<meta name="twitter:card" value="summary_large_image" />
-	<meta name="twitter:site" value="@registerguard" />
-	<meta property="twitter:title" content="{{ object.headline }}" />
-	<meta property="twitter:url" content="{{ object.get_absolute_url }}" />
-	{% with object.image_set.all.0 as ap_image %}
-		{% thumbnail ap_image.image "990x990" as im %}
-			<meta property="twitter:image" content="{{ im.url }}" />
-			<meta property="og:image" content="{{ im.url }}" />
-		{% endthumbnail %}
-	{% endwith %}
-	<meta property="og:url" content="{{ object.get_absolute_url }}" />
-	<meta property="og:type" content="article" />
-	<meta property="og:title" content="{{ object.headline }}" />
-{% endblock head_extra %}
-
 {% block location %}
 
 	{% if page.title or page.description_short %}
@@ -377,8 +361,6 @@
 
 		<hr>
 {% endcomment %}
-
-{% comment %}
 		<div class="w_row">
 
 			<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
@@ -432,8 +414,6 @@
 			<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
 
 		</div> <!-- /.w_row -->
-
-{% endcomment %}
 
 	{% endautoescape %}
 

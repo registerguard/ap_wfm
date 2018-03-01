@@ -1,10 +1,10 @@
-from ap_wfm.templatetags.humanize_list import humanize_list
-from cuddlybuddly.storage.s3.storage import S3Error
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.http import HttpResponse
 from django.utils import simplejson
+from ap_wfm.templatetags.humanize_list import humanize_list
+from cuddlybuddly.storage.s3.storage import S3Error
 from sorl.thumbnail import ImageField, get_thumbnail
 
 def json_response(func):
@@ -89,8 +89,7 @@ class APStory(models.Model):
         return '%s ID:%s' % (self.headline, self.id)
 
     def get_absolute_url(self):
-        # return '//{}/apf/{}/{}/'.format('projects.registerguard.com', self.category.all()[0].get_name_display(), self.slug)
-        return '/apf/%s/%s/' % (self.category.all()[0].name, self.slug)
+        return '/apf/%s/%s/' % (self.category.all()[0].get_name_display(), self.slug)
 
     def image_count(self):
         return self.image_set.count()
@@ -129,12 +128,6 @@ class Image(models.Model):
         return self.original_filename
 
     def to_json_image_dict(self):
-        '''
-        This is called by the slideshow on the detail page view and the 
-        S3Error is necessary for when the image is missing, otherwise the 
-        whole page URL will throw an error. (With the error, you just get a 
-        black slideshow ... )
-        '''
         try:
             json_image = get_thumbnail(self.image, '990x990')
             return {
