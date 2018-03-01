@@ -89,7 +89,7 @@ class APStory(models.Model):
         return '%s ID:%s' % (self.headline, self.id)
 
     def get_absolute_url(self):
-        return '/apf/%s/%s/' % (self.category.all()[0].get_name_display(), self.slug)
+        return '/apf/%s/%s/' % (self.category.all()[0].name, self.slug)
 
     def image_count(self):
         return self.image_set.count()
