@@ -129,6 +129,12 @@ class Image(models.Model):
         return self.original_filename
 
     def to_json_image_dict(self):
+        '''
+        This is called by the slideshow on the detail page view and the 
+        S3Error is necessary for when the image is missing, otherwise the 
+        whole page URL will throw an error. (With the error, you just get a 
+        black slideshow ... )
+        '''
         try:
             json_image = get_thumbnail(self.image, '990x990')
             return {
@@ -136,9 +142,9 @@ class Image(models.Model):
                 'byline': self.source,
                 'image': json_image.url
             }
-        except (S3Error, IOError, TypeError):	
-            return {	
-                'description': self.caption,	
-                'byline': self.source,	
-                'image': ''	
+        except (S3Error, IOError, TypeError):
+            return {
+                'description': self.caption,
+                'byline': self.source,
+                'image': ''
             }
