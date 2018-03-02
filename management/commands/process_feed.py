@@ -427,7 +427,7 @@ The solution is to open up the write permissions on
                     else:
                         # Save the newest one ...
                         APStory_instance.save()
-                        logger.debug('XXX CREATED {0} XXX'.format(e.title.text))
+                        logger.debug(u'XXX CREATED {0} XXX'.format(e.title.text))
 
                     if old_cats:
                         for salvaged_cat in old_cats:
