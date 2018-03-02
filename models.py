@@ -88,8 +88,10 @@ class APStory(models.Model):
     def __unicode__(self):
         return '%s ID:%s' % (self.headline, self.id)
 
+    # http://django.readthedocs.io/en/1.3.X/ref/models/instances.html#the-permalink-decorator
+    @models.permalink
     def get_absolute_url(self):
-        return '/apf/%s/%s/' % (self.category.all()[0].name, self.slug)
+        return ('ap_story_detail', [self.category.all()[0].name, self.slug])
 
     def image_count(self):
         return self.image_set.count()
