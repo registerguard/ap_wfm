@@ -80,6 +80,7 @@ class APStoryDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(APStoryDetailView, self).get_context_data(**kwargs)
         context.update({
+            'current_site': Site.objects.get_current(),
             'page': {'title': 'The Wire', 'cat': self.kwargs['category'], 'description_short': PRETTY_NAME.get(self.kwargs['category'], self.kwargs['category'])}
         })
         return context
