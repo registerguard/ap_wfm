@@ -42,9 +42,12 @@
 				{% for story in object_list %}
 					
 					{% if story.category.all.0 %}
-					
+
 					<article>
-						
+						<!-- {{ story.category.all|join:"" }} -->
+
+						{% if "region" in story.category.all|join:"" %}<span class="label">{{ story.contributor }}</span>{% endif %}
+
 						<h1 class="h5"><a href="{% url ap_story_detail story.category.all.0 story.slug %}">{{ story.headline }}</a></h1>
 						
 						<p>{{ story.body|safe|striptags|truncatewords:25 }}</p>
