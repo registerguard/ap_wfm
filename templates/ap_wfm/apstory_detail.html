@@ -84,11 +84,11 @@
 
 {% endblock location %}
 
-{% block body %}
+{% block content %}
 
 	{% autoescape off %}
 
-		<article>
+		<article class="full">
 
 			<header>
 
@@ -249,13 +249,11 @@
 
 			<hr>
 
-			<div class="w_row">
+			<div class="inner">
 
-				<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
+				<div class="article-body">
 
-				<div class="w_col w_C640 w_D980">
-
-					<div id="story">
+					<div id="inner">
 
 						{# https://github.com/registerguard/tracker/issues/541 & 542 #}
 						{% with ps=object.body|splitter:"</p>"|slice:"0:-1" %}
@@ -292,13 +290,11 @@
 
 						{% endwith %}
 
-					</div> <!-- /#story -->
+					</div> <!-- /.inner -->
 
-					<div class="w_col w_C130 Aoff Boff">&nbsp;</div>
+				</div> <!-- /.article-body -->
 
-				</div> <!-- /.w_col -->
-
-			</div> <!-- /.w_row -->
+			</div> <!-- /.inner -->
 
 		</article>
 
@@ -417,7 +413,7 @@
 
 	{% endautoescape %}
 
-{% endblock body %}
+{% endblock content %}
 
 {% block footer_last %}
 	<script src="//registerguard.com/csp/cms/sites/rg/assets/includes/slider02.csp"></script>

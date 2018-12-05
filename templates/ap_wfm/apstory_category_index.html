@@ -1,106 +1,60 @@
 {% extends "ap_wfm/ap_wfm.html" %}
 {% load get_url_content %}
-{% load adicio_widget %}
 
 {% block head_title %}{{ page.description_short|title }} | The Associated Press{% endblock head_title %}
 
-{% block head_ad_ids %}
-	// If desktop, serve weather widget
-	if (document.documentElement.clientWidth >= 1005){
-		googletag.defineSlot('/30582678/RGM', [120, 60], 'ros-weather-widget')
-			.setTargeting('pos', ['rgm_weather_widget'])
-			.addService(googletag.pubads());
+{% block head_parsely %}
+<script type="application/ld+json">
+	{
+		"@context": "http://schema.org",
+		"@type": "NewsArticle",
+		"headline": "Eugene police calls for service, {{ object_list.0.received|date:"F, Y" }}, The Register-Guard",
+		"url": "http://{{ request.META.HTTP_HOST }}{{ request.path }}",
+		"thumbnailUrl": "https://www.registerguard.com/Global/images/head/nameplate/fb/registerguard_fb_300x300.png",
+		"datePublished": "{{ object_list.0.received|date:'Y-m'}}-01T00:00:00",
+		"dateModified": "{{ object_list.0.received|date:'c' }}",
+		"articleSection": "News",
+		<!-- "creator": ["John Heasly"], -->
+		"keywords": ["heasly"]
 	}
-
-	// Define ad units
-	googletag.defineSlot('/30582678/RGM', [[320, 50], [728, 90]], 'leaderboard-top')
-		.setTargeting('pos', ['atf']) // Above the fold
-		.defineSizeMapping(mapping)
-		.addService(googletag.pubads());
-	googletag.defineSlot('/30582678/RGM', [300, 250], 'medium-rectangle-1')
-		.setTargeting('pos', ['rgm_one'])
-		.addService(googletag.pubads());
-	googletag.defineSlot('/30582678/RGM', [300, 250], 'medium-rectangle-2')
-		.setTargeting('pos', ['rgm_two'])
-		.addService(googletag.pubads());
-	googletag.defineSlot('/30582678/RGM', [[320, 50], [728, 90]], 'leaderboard-bottom')
-		.setTargeting('pos', ['btf']) // Below the fold
-		.defineSizeMapping(mapping)
-		.addService(googletag.pubads());
-{% endblock head_ad_ids %}
+</script>
+<!-- /Parse.ly global main meta -->
+{% endblock head_parsely %}
 
 {% block content %}
-	
-<section>
+<section class="section-summary basicHeadlines fullRow">
 
-	<div class="w_row">
+<h1 class="heading">News from around the state</h1>
+	{% for story in object_list %}
+		
+		{% if story.category.all.0 %}
 
-		<div class="w_col w_B300 w_C640 w_D980 Bla Cla Dla">
+		<article class="summary">
 			
-			<div class="wrap give">
-			
-				{% for story in object_list %}
-					
-					{% if story.category.all.0 %}
+			<div class="inner">
 
-					<article>
-						<!-- {{ story.category.all|join:"" }} -->
+				<div class="teaser">
 
-						{% if "region" in story.category.all|join:"" %}<span class="label">{{ story.contributor }}</span>{% endif %}
+					{% if "region" in story.category.all|join:"" %}<span class="article-v2"><span class="inner"><span class="article-body"><span class="byline">{{ story.contributor }}</span></span></span></span>{% endif %}
 
-						<h1 class="h5"><a href="{% url ap_story_detail story.category.all.0 story.slug %}">{{ story.headline }}</a></h1>
-						
-						<p>{{ story.body|safe|striptags|truncatewords:25 }}</p>
-						<!-- category: {{ category }}; current_site: {{ current_site }} -->
-						<p class="pub pub1">updated: {{ story.updated|date:"P, N j" }}</p>
-						
-					</article>
-					
-					<hr>
-					
-					{% endif %}
-					
-				{% endfor %}
-			
-			</div> <!-- /.wrap -->
-	
-		</div> <!-- /.w_col -->
+					<header>
+						<h2 class="headline" style="overflow-wrap: break-word;">
+						<a href="{% url ap_story_detail story.category.all.0 story.slug %}"><span>{{ story.headline }}</span></a>
+						</h2>
+					</header>
 
-		<div class="w_col w_B300 Blb Clb Dlb">
-			
-			<div class="wrap give">
-				
-				<!-- //////////////////// Medium Rectangle 1 \\\\\\\\\\\\\\\\\\\\ -->
-				<div class='advert'><div id='medium-rectangle-1'><script>googletag.cmd.push(function() { googletag.display('medium-rectangle-1'); });</script></div></div>
-				<!-- \\\\\\\\\\\\\\\\\\\\ Medium Rectangle 1 //////////////////// -->
-				
-				<hr>
-				
-				<!-- //////////////////// ROS Adicio Widget \\\\\\\\\\\\\\\\\\\\ -->
-				{% get_adicio_widget %}
-				<!-- \\\\\\\\\\\\\\\\\\\\ ROS Adicio Widget //////////////////// -->
-				
-				<hr>
-				
-				<!-- //////////////////// Medium Rectangle 2 \\\\\\\\\\\\\\\\\\\\ -->
-				<div class="advert"><div id='medium-rectangle-2'><script>googletag.cmd.push(function() { googletag.display('medium-rectangle-2'); });</script></div></div>
-				<!-- \\\\\\\\\\\\\\\\\\\\ Medium Rectangle 2 //////////////////// -->
-				
-				<hr>
-				
-				{% geturl "http://go.registerguard.com/entertainment/go_widget2/4/" 30 %}
-				
-				<hr>
-				
-				<!-- //////////////////// ROS Medium Rectangle 3 \\\\\\\\\\\\\\\\\\\\ -->
-				<div class="advert"><div id="ros-medium-rectangle-3"><script>_ox.showAdUnit('537200305');</script></div></div>
-				<!-- \\\\\\\\\\\\\\\\\\\\ ROS Medium Rectangle 3 //////////////////// -->
-				
-			</div> <!-- /.wrap -->
-			
-		</div> <!-- /.w_col -->
-	
-	</div> <!-- /.w_row -->
+					<div class="excerpt is-truncated" style="overflow-wrap: break-word;">{{ story.body|safe|striptags|truncatewords:25 }}</div>
+					<!-- category: {{ category }}; current_site: {{ current_site }} -->
+					<span class="dateline">Updated: {{ story.updated|date:"P, N j" }}</span>
 
+				</div><!-- /.teaser -->
+
+			</div><!-- /.inner -->
+
+		</article>
+		
+		{% endif %}
+		
+	{% endfor %}
 </section>
 {% endblock content %}
