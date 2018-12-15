@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 from ap_wfm.views import APStoryListView, APStoryDetailView, \
 APCategoryCountListView, PortlandStocks, OregonSports, \
-OregonNewsNoSportsNoBizNoLott, Lotteries, json_view
+OregonNewsNoSportsNoBizNoLott, Lotteries, ContributorIndex, json_view
 from ap_wfm.feeds import RssLatestEntries, AtomLatestEntries, RssLatestRegion
 
 urlpatterns = patterns('',
@@ -24,4 +24,5 @@ urlpatterns = patterns('',
     url(r'^(?P<category>[a-z]+)/index/(?P<count>\d+)/$', APCategoryCountListView.as_view(template_name = 'ap_wfm/apstory_category_index.html'), name='ap_topic_index'),
     url(r'^index/$', 'ap_wfm.views.category_index'),
     url(r'^(?P<story_id>\d+)/json/$', 'ap_wfm.views.json_image_view', name='json_image_list'),
+    url(r'^c/(?P<contributor>)[\-\. \w]+/(?P<count>\d+)/$', ContributorIndex.as_view(), name='contributor_index'),
 )

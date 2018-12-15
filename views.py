@@ -47,6 +47,7 @@ def json_image_view(request, *args, **kwargs):
     return json_out
     # return [ im.to_json_image_dict() for im in APStory.objects.get(id=story_id).image_set.all() ]
 
+
 class APStoryListView(ListView):
 
     template_name = 'ap_wfm/apstory_index_all.html'
@@ -61,6 +62,7 @@ class APStoryListView(ListView):
             'page': {'title': 'The Associated Press', 'description_short': 'All'},
         })
         return context
+
 
 class APStoryDetailView(DetailView):
     '''
@@ -84,6 +86,7 @@ class APStoryDetailView(DetailView):
             'page': {'title': 'The Wire', 'cat': self.kwargs['category'], 'description_short': PRETTY_NAME.get(self.kwargs['category'], self.kwargs['category'])}
         })
         return context
+
 
 class APCategoryCountListView(ListView):
     def get_queryset(self):
@@ -128,6 +131,7 @@ class APCategoryCountListView(ListView):
 
         return context
 
+
 class PortlandStocks(ListView):
 
     def get_queryset(self):
@@ -140,6 +144,7 @@ class PortlandStocks(ListView):
             'page': {'title': 'the wire', 'description_short': 'regional business'}
         })
         return context
+
 
 class OregonSports(ListView):
 
@@ -161,6 +166,7 @@ class OregonSports(ListView):
             })
         return context
 
+
 class OregonNewsNoSportsNoBizNoLott(ListView):
 
     def get_queryset(self):
@@ -172,6 +178,7 @@ class OregonNewsNoSportsNoBizNoLott(ListView):
             'current_site': Site.objects.get_current(),
         })
         return context
+
 
 class Lotteries(ListView):
 
@@ -235,3 +242,12 @@ def category_index(request):
     categories_dict['pretty_name'] = PRETTY_NAME
 
     return render(request, 'ap_wfm/apstory_categories_index.html', categories_dict)
+
+
+class ContributorIndex(ListView):
+    '''
+    Returns an contributor-based index page
+    '''
+
+    def get_queryset(self):
+        return APStory.objects.filter(contributor=self.kwargs['contributor'], published__lte=datetime.datetime.now()).exclude(consumer_ready=False)[:self.kwargs['count']]

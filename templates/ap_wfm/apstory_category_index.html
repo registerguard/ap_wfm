@@ -8,13 +8,12 @@
 	{
 		"@context": "http://schema.org",
 		"@type": "NewsArticle",
-		"headline": "Eugene police calls for service, {{ object_list.0.received|date:"F, Y" }}, The Register-Guard",
+		"headline": "AP {{ page.description_short|title }} index {{ object_list.0.published|date:"F, Y" }}, The Register-Guard",
 		"url": "http://{{ request.META.HTTP_HOST }}{{ request.path }}",
 		"thumbnailUrl": "https://www.registerguard.com/Global/images/head/nameplate/fb/registerguard_fb_300x300.png",
-		"datePublished": "{{ object_list.0.received|date:'Y-m'}}-01T00:00:00",
-		"dateModified": "{{ object_list.0.received|date:'c' }}",
+		"datePublished": "{{ object_list.0.published|date:'Y-m'}}-01T00:00:00",
+		"dateModified": "{{ object_list.0.updated|date:'c' }}",
 		"articleSection": "News",
-		<!-- "creator": ["John Heasly"], -->
 		"keywords": ["heasly"]
 	}
 </script>
