@@ -23,7 +23,7 @@
 {% block content %}
 <section class="section-summary basicHeadlines fullRow">
 
-<h1 class="heading">News from around the state</h1>
+<h1 class="heading">News from {% if is_region %}{{ object_list.0.contributor }}{% else %}around Oregon{% endif %}</h1>
 	{% for story in object_list %}
 		
 		{% if story.category.all.0 %}
@@ -34,7 +34,7 @@
 
 				<div class="teaser">
 
-					{% if "region" in story.category.all|join:"" %}<span class="article-v2"><span class="inner"><span class="article-body"><span class="byline">{{ story.contributor }}</span></span></span></span>{% endif %}
+					{% if "region" in story.category.all|join:"" %}<span class="article-v2"><span class="inner"><span class="article-body"><span class="byline"><a href="{% url contributor_index story.contributor 25 %}">{{ story.contributor }}</a></span></span></span></span>{% endif %}
 
 					<header>
 						<h2 class="headline" style="overflow-wrap: break-word;">

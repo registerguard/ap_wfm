@@ -251,3 +251,10 @@ class ContributorIndex(ListView):
 
     def get_queryset(self):
         return APStory.objects.filter(contributor=self.kwargs['contributor'], published__lte=datetime.datetime.now()).exclude(consumer_ready=False)[:self.kwargs['count']]
+
+    def get_context_data(self, **kwargs):
+        context = super(ContributorIndex, self).get_context_data(**kwargs)
+        context.update({
+            'is_region': True,
+        })
+        return context
