@@ -1,33 +1,6 @@
 {% extends "ap_wfm/ap_wfm.html" %}
-{% load get_url_content %}
-{% load adicio_widget %}
 
 {% block head_title %}{{ page.title|title }} | {{ page.description_short }}{% endblock head_title %}
-
-{% block head_ad_ids %}
-	// If desktop, serve weather widget
-	if (document.documentElement.clientWidth >= 1005){
-		googletag.defineSlot('/30582678/RGM', [120, 60], 'ros-weather-widget')
-			.setTargeting('pos', ['rgm_weather_widget'])
-			.addService(googletag.pubads());
-	}
-
-	// Define ad units
-	googletag.defineSlot('/30582678/RGM', [[320, 50], [728, 90]], 'leaderboard-top')
-		.setTargeting('pos', ['atf']) // Above the fold
-		.defineSizeMapping(mapping)
-		.addService(googletag.pubads());
-	googletag.defineSlot('/30582678/RGM', [300, 250], 'medium-rectangle-1')
-		.setTargeting('pos', ['rgm_one'])
-		.addService(googletag.pubads());
-	googletag.defineSlot('/30582678/RGM', [300, 250], 'medium-rectangle-2')
-		.setTargeting('pos', ['rgm_two'])
-		.addService(googletag.pubads());
-	googletag.defineSlot('/30582678/RGM', [[320, 50], [728, 90]], 'leaderboard-bottom')
-		.setTargeting('pos', ['btf']) // Below the fold
-		.defineSizeMapping(mapping)
-		.addService(googletag.pubads());
-{% endblock head_ad_ids %}
 
 {% block content %}
 
@@ -39,113 +12,64 @@
 			
 			<section>
 				
-				<h1 class="off">Latest Pacific Northwest news from The Associated Press</h1>
+				<h1 class="heading" style="margin-bottom: .5em;">Pacific Northwest news from the AP</h1>
 				
-				<div class="w_row">
+				<div class="col-md-6">
 					
-					<div class="w_col w_C300 w_D470 Bla Cla Dla">
-						
-						<div class="wrap give">
-							
-							<h2 class="reverse reverse1">Latest Oregon news</h2>
-							
-							{% for story in object_list %}
-								
-								{% if story.category.all.0 %}
-								
-									<article>
-									
-										<h1 class="h5"><a href="{% url ap_story_detail story.category.all.0 story.slug %}">{{ story.headline }}</a></h1>
-									
-										<p>{{ story.body|safe|striptags|truncatewords:25 }}</p>
-									
-										<p class="pub pub1">updated: {{ story.updated|date:"P, N j" }}</p>
-									
-									</article>
-									
-									<hr>
-									
-								{% endif %}
-								
-							{% endfor %}
-							
-						</div> <!-- /.wrap -->
-						
-					</div> <!-- .w_col -->
+					<h2 class="heading">Latest Oregon news</h2>
 					
-					<div class="w_col w_C300 w_D470 Blb Clb Dlb">
+					{% for story in object_list %}
 						
-						<div class="wrap give">
-							
-							<h2 class="reverse reverse1">Latest Washington news</h2>
-							
-							{% for story in wash_stories %}
-								
-								{% if story.category.all.0 %}
-								
-									<article>
-									
-										<h1 class="h5"><a href="{% url ap_story_detail story.category.all.0 story.slug %}">{{ story.headline }}</a></h1>
-									
-										<p>{{ story.body|safe|striptags|truncatewords:25 }}</p>
-									
-										<p class="pub pub1">updated: {{ story.updated|date:"P, N j" }}</p>
-										
-									</article>
-									
-									<hr>
-									
-								{% endif %}
-								
-							{% endfor %}
-							
-						</div> <!-- /.wrap -->
+						{% if story.category.all.0 %}
 						
-					</div> <!-- .w_col -->
+							<article>
+							
+								<h2 class="headline"><a href="{% url ap_story_detail story.category.all.0 story.slug %}">{{ story.headline }}</a></h2>
+							
+								<p>{{ story.body|safe|striptags|truncatewords:25 }}</p>
+							
+								<p class="pub pub1">updated: {{ story.updated|date:"P, N j" }}</p>
+							
+							</article>
+							
+							<hr>
+							
+						{% endif %}
+						
+					{% endfor %}
+
+				</div> <!-- /.col-md-6 -->
 					
-				</div> <!-- .w_row -->
+				<div class="col-md-6">
+
+					<h2 class="heading">Latest Washington news</h2>
+						
+					{% for story in wash_stories %}
+						
+						{% if story.category.all.0 %}
+						
+							<article>
+							
+								<h2 class="headline"><a href="{% url ap_story_detail story.category.all.0 story.slug %}">{{ story.headline }}</a></h2>
+							
+								<p>{{ story.body|safe|striptags|truncatewords:25 }}</p>
+							
+								<p class="pub pub1">updated: {{ story.updated|date:"P, N j" }}</p>
+								
+							</article>
+							
+							<hr>
+							
+						{% endif %}
+						
+					{% endfor %}
 					
+				</div> <!-- /.col-md-6 -->
+				
 			</section>
 			
 		</div> <!-- .w_col -->
 		
-
-		
-		<div class="w_col w_B300 Blb Clb Dlb">
-			
-			<div class="wrap give">
-				
-				<!-- //////////////////// Medium Rectangle 1 \\\\\\\\\\\\\\\\\\\\ -->
-				<div class='advert'><div id='medium-rectangle-1'><script>googletag.cmd.push(function() { googletag.display('medium-rectangle-1'); });</script></div></div>
-				<!-- \\\\\\\\\\\\\\\\\\\\ Medium Rectangle 1 //////////////////// -->
-				
-				<hr>
-				
-				<!-- //////////////////// ROS Adicio Widget \\\\\\\\\\\\\\\\\\\\ -->
-				{% get_adicio_widget %}
-				<!-- \\\\\\\\\\\\\\\\\\\\ ROS Adicio Widget //////////////////// -->
-				
-				<hr>
-				
-				<!-- //////////////////// Medium Rectangle 2 \\\\\\\\\\\\\\\\\\\\ -->
-				<div class="advert"><div id='medium-rectangle-2'><script>googletag.cmd.push(function() { googletag.display('medium-rectangle-2'); });</script></div></div>
-				<!-- \\\\\\\\\\\\\\\\\\\\ Medium Rectangle 2 //////////////////// -->
-				
-				<hr>
-				
-				{% geturl "http://go.registerguard.com/entertainment/go_widget2/4/" 30 %}
-				
-				<hr>
-				
-				<!-- //////////////////// ROS Medium Rectangle 3 \\\\\\\\\\\\\\\\\\\\ -->
-				<div class="advert"><div id="ros-medium-rectangle-3"><script>_ox.showAdUnit('537200305');</script></div></div>
-				<!-- \\\\\\\\\\\\\\\\\\\\ ROS Medium Rectangle 3 //////////////////// -->
-				
-			</div> <!-- /.wrap -->
-			
-		</div> <!-- /.w_col -->
-
-
 	</div> <!-- .w_row -->
 	
 {% endblock content %}
